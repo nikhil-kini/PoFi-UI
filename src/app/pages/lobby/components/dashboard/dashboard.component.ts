@@ -3,6 +3,8 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { Constants } from 'src/app/constants/constants';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { GameInfoDialogComponent } from '../game-info-dialog/game-info-dialog.component';
 
 @Component({
   selector: 'pofri-dashboard',
@@ -10,9 +12,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  dialogWidth: string | undefined;
   private breakpointObserver = inject(BreakpointObserver);
 
-  constructor(private router: Router){}
+  constructor(private router: Router, private matDialog: MatDialog){}
 
   /** Based on the screen size, switch from standard to one column per row */
   cards = this.breakpointObserver.observe(Constants.MOBILE_TRANSITION).pipe(
@@ -35,7 +38,17 @@ export class DashboardComponent {
     })
   );
 
-  createSession(){
-    this.router.navigate(['/nlholdem']);
+  onOpenDialogClick(){
+    var _dialog = this.matDialog.open(GameInfoDialogComponent,{
+      width: '360px',
+      data: {
+        title: 'Game Information',
+      }
+    });
+
+    _dialog.afterClosed().subscribe(item => {
+      console.log(item);
+    })
+  
   }
 }

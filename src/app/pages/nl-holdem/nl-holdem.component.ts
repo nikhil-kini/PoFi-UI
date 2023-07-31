@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'pofri-nl-holdem',
   templateUrl: './nl-holdem.component.html',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class NlHoldemComponent {
 
+  
 }

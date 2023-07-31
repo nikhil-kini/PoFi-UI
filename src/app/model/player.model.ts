@@ -1,10 +1,16 @@
 import { Card } from "./cards.model";
 
-export interface Player{
+export class Player{
     playerNumber: number;
-    playerCards: Array<Card>;
-    playerPosition: PlayerPosition;
-    nextPlayer: Player;
+    playerCards: Array<Card> | undefined;
+    playerPosition: PlayerPosition | undefined;
+    nextPlayer: Player | null;
+
+    constructor(playerNumber: number){
+        this.playerNumber = playerNumber;
+        this.nextPlayer = null;
+    }
+
 }
 
 export enum PlayerPosition{

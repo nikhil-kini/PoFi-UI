@@ -1,0 +1,44 @@
+<form [formGroup]="gameInfoForm" (ngSubmit)="saveGameInfo()">
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Table Seats</mat-label>
+            <input matInput formControlName="seats" placeholder="Number">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Total Players in the table.</mat-hint>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Ante</mat-label>
+            <input matInput formControlName="ante" placeholder="Amount">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Minimum amount to put to table in each round.</mat-hint>
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Small Bet</mat-label>
+            <input matInput formControlName="small_bet" placeholder="Amount">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Samll Blind amount</mat-hint>
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field appearance="fill">
+            <mat-label>Big Bet</mat-label>
+            <input matInput formControlName="big_bet" placeholder="Amount">
+            <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            <mat-hint>Big Blind amount</mat-hint>
+        </mat-form-field>
+    </p>
+</div>
+
+<div mat-dialog-actions class="action">
+    <button mat-raised-button color="success">Save</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="'closed'">Cancel</button>
+</div>
+</form>
