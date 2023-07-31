@@ -13,11 +13,19 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle'
 import { FormsModule } from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { LobbyComponent } from './pages/lobby/lobby.component';
+import { NlHoldemComponent } from './pages/nl-holdem/nl-holdem.component';
+import { DashboardComponent } from './pages/lobby/components/dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidenavComponent,
+    LobbyComponent,
+    NlHoldemComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +39,9 @@ import { SidenavComponent } from './components/sidenav/sidenav.component';
     MatSlideToggleModule,
     FormsModule,
     MatCardModule,
+    MatGridListModule,
+    MatMenuModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
