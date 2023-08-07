@@ -12,7 +12,6 @@ import { GameInfoDialogComponent } from '../game-info-dialog/game-info-dialog.co
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  dialogWidth: string | undefined;
   private breakpointObserver = inject(BreakpointObserver);
 
   constructor(private router: Router, private matDialog: MatDialog){}
@@ -41,6 +40,7 @@ export class DashboardComponent {
   onOpenDialogClick(){
     var _dialog = this.matDialog.open(GameInfoDialogComponent,{
       width: '360px',
+      hasBackdrop: false,
       data: {
         title: 'Game Information',
       }
