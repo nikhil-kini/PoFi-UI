@@ -2,7 +2,6 @@ import { Card } from "./cards.model";
 
 export class Player{
     playerNumber: number;
-    playerCards: Array<Card> | undefined;
     playerPosition: PlayerPosition | undefined;
     nextPlayer: Player | null;
 
@@ -14,9 +13,9 @@ export class Player{
 }
 
 export enum PlayerPosition{
-    SMALL_BLIND = 1,
-    BIG_BLIND = 2,
-    EARLY = 3,
-    MIDDLE = 4,
-    LATE = 5
+    SMALL_BLIND,
+    BIG_BLIND,
+    EARLY,
+    MIDDLE,
+    LATE
 }

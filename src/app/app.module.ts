@@ -22,6 +22,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { GameInfoDialogComponent } from './pages/lobby/components/game-info-dialog/game-info-dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { GameStartServiceService } from './service/game-start-service.service';
+import { UserGameDetailDailogComponent } from './pages/nl-holdem/components/user-game-detail-dailog/user-game-detail-dailog.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,7 @@ import {MatInputModule} from '@angular/material/input';
     NlHoldemComponent,
     DashboardComponent,
     GameInfoDialogComponent,
+    UserGameDetailDailogComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,9 +53,10 @@ import {MatInputModule} from '@angular/material/input';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [GameStartServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

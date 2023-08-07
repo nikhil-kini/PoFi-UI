@@ -8,13 +8,11 @@ import { Player } from '../model/player.model';
 export class GerenaratePlayerSeatingService {
   head: Player | null;
   tail: Player | null;
-  startPlayer: Player | null;
   playerCount = 0;
 
   constructor() {
     this.head = null;
     this.tail = null;
-    this.startPlayer = null;
    }
 
   /**
@@ -24,10 +22,10 @@ export class GerenaratePlayerSeatingService {
    * */
   addPlayer(playerNumber: number): void {
     var newPlayer = new Player(playerNumber);
-    if (this.head) {
+    if (this.head === null) {
       this.head = newPlayer;
-      this.tail = newPlayer;
-    }else if(this.tail){
+    }
+    else if(this.tail){
       this.tail.nextPlayer = newPlayer;
     }
     this.tail = newPlayer;
@@ -57,7 +55,6 @@ export class GerenaratePlayerSeatingService {
         if (this.head === this.tail) {
           this.head = null;
           this.tail = null;
-          this.startPlayer = null;
         } else {
           if (nextPlayer) {
             currentPlayer.nextPlayer = nextPlayer.nextPlayer;
@@ -66,9 +63,6 @@ export class GerenaratePlayerSeatingService {
             }
             if (this.tail === nextPlayer) {
               this.tail = currentPlayer;
-            }
-            if (this.startPlayer === nextPlayer) {
-              this.startPlayer = this.startPlayer.nextPlayer;
             }
           }
         }

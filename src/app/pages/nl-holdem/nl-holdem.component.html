@@ -1,2 +1,28 @@
+<div class="grid-container">
+    <h1 class="mat-h1">No-Limit Holdem</h1>
+    <mat-grid-list cols="2" rowHeight="480px">
+      <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+        <mat-card class="dashboard-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{userInfo | json}}            
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="dashboard-card-content">
+            <p>{{currentPlayer?.playerNumber | json}}</p>
 
+            <div *ngIf="currentPlayer?.playerNumber == 1; then us else notUs"></div>
+            <ng-template #us>
+              <button mat-button (click)="getResult()">Result</button>
+            </ng-template>
+            <ng-template #notUs>
+              <button mat-raised-button color="accent" (click)="call()">Call</button>
+              <button mat-raised-button color="accent" (click)="raise()">Raise</button>
+              <button mat-raised-button color="warn" (click)="fold()">Fold</button>
+            </ng-template>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
   

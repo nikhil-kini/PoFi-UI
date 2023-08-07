@@ -20,8 +20,8 @@ export enum Rank{
 }
 
 export enum Suit{
-    HEART = 0,
-    SPADE = 1,
-    CLUB = 2,
-    DIAMOND = 3
+    '♥',
+    '♠',
+    '♦',
+    '♣'
 }

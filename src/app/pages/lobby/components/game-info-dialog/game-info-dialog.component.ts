@@ -1,6 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { GameStartDetails } from 'src/app/model/table.model';
+import { GameStartServiceService } from 'src/app/service/game-start-service.service';
 
 @Component({
   selector: 'pofri-game-info-dialog',
@@ -8,23 +11,43 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./game-info-dialog.component.scss']
 })
 export class GameInfoDialogComponent {
+  startData = {} as GameStartDetails;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref:MatDialogRef<GameInfoDialogComponent>, private builder: FormBuilder){
-    
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private ref: MatDialogRef<GameInfoDialogComponent>, private builder: FormBuilder, private gameStartService: GameStartServiceService, private router: Router) {
+
   }
 
-  closepopup(){
-    this.ref.close('closed')
+  closepopup() {
+    this.ref.close('closed');
   }
 
   gameInfoForm = this.builder.group({
-    seats: this.builder.control(''),
-    ante: this.builder.control(''),
-    small_bet: this.builder.control(''),
-    big_bet: this.builder.control(''),
+    profileName: this.builder.control(this.startData.profileName,[
+      Validators.required
+    ]),
+    websiteName: this.builder.control(this.startData.websiteName,
+      [Validators.required,
+      Validators.pattern(`[a-zA-Z0-9.\-]*`)]),
+    tableSeats: this.builder.control(this.startData.tableSeats,
+      [Validators.required,
+      Validators.pattern('[2-9]')]),
+    anteAmount: this.builder.control(this.startData.anteAmount,
+      [Validators.required,
+      Validators.pattern('[0-9.]*')]),
+    smallBet: this.builder.control(this.startData.smallBet,
+      [Validators.required,
+      Validators.pattern('[0-9.]*')]),
+    bigBet: this.builder.control(this.startData.bigBet,
+      [Validators.required,
+      Validators.pattern('[0-9.]*')]),
   });
 
-  saveGameInfo(){
-    console.log(this.gameInfoForm.value);
+  saveGameInfo() {
+    // console.log(this.gameInfoForm.value.anteAmount);
+    // console.log(this.startData.bigBet);
+    this.gameStartService.setGameStartData(this.gameInfoForm.value);
+    this.closepopup();
+    this.router.navigate(['/', 'nlholdem']);
+    
   }
 }
