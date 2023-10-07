@@ -39,7 +39,7 @@ export class UserGameDetailDailogComponent {
   saveUserInfo(){
     console.log(this.userDetails.value);
     this.closePopUp('Save close');
-    this.gameStartService.setgameUserInfoData(this.userDetails.value)
+    this.gameStartService.setGameUserInfoData(this.userDetails.value)
   }
 
   cancel(){

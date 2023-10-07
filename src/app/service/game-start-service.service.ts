@@ -19,7 +19,7 @@ export class GameStartServiceService {
     this.gameStartDataSource.next(data);
   }
 
-  setgameUserInfoData(data: any){
+  setGameUserInfoData(data: any){
     this.gameUserInfoSource.next(data);
   }
 }

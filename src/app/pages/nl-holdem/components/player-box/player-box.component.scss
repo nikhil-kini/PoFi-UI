@@ -1,0 +1,29 @@
+mat-card{
+    min-width: 4em;
+
+   h4{
+        text-align: center;
+        margin: auto;
+    }
+
+    hr{
+        border-top: 1px solid #bbb;
+        min-width: 4em;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    div{
+        p{
+            font-size: small;
+        text-align: left;
+        margin-bottom: 1px;
+        margin-top: 1px;
+        margin-left: 10px;
+        }
+    }
+
+    .current{
+        background-color: aquamarine;
+    }
+}

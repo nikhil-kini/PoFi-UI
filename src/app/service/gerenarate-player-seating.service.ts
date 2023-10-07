@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Player } from '../model/player.model';
+import { Player, PlayerPosition } from '../model/player.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +20,8 @@ export class GerenaratePlayerSeatingService {
    * @param  playerNumber takes player number with int data type
    * @return void: returns the null has type
    * */
-  addPlayer(playerNumber: number): void {
-    var newPlayer = new Player(playerNumber);
+  addPlayer(playerNumber: number, playerPosition: PlayerPosition): void {
+    var newPlayer = new Player(playerNumber, playerPosition);
     if (this.head === null) {
       this.head = newPlayer;
     }
@@ -103,6 +103,35 @@ export class GerenaratePlayerSeatingService {
     }
 
     throw new Error("The Player is not found in the table");
+  }
+
+  /**
+   * size() returns player count
+   * @return number player count
+   * */
+  size(): number{
+    return this.playerCount
+  }
+
+  /**
+   * toArray (Player) gives the array of players in the Circular Linked List
+   * with the passed in player at the begining of the Array.
+   * @param  Player takes player in the Linked List of players
+   * @return Player Array returns the Player Array of all player in Linked List
+   * */
+  toArray(start: Player | null= this.head): Array<Player | null | undefined>{
+    var players: Array<Player | null | undefined> = [];
+    var current: Player | null | undefined = start;
+
+    if (start) {
+      do {
+        players.push(current);
+        current = current?.nextPlayer;
+      } while (current != start);
+    }else{
+      players = [];
+    }
+    return players;
   }
 
 }

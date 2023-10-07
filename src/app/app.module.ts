@@ -25,6 +25,8 @@ import {MatInputModule} from '@angular/material/input';
 import { GameStartServiceService } from './service/game-start-service.service';
 import { UserGameDetailDailogComponent } from './pages/nl-holdem/components/user-game-detail-dailog/user-game-detail-dailog.component';
 import {MatSelectModule} from '@angular/material/select';
+import { PlayerBoxComponent } from './pages/nl-holdem/components/player-box/player-box.component';
+import { PokerTableComponent } from './pages/nl-holdem/components/poker-table/poker-table.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import {MatSelectModule} from '@angular/material/select';
     DashboardComponent,
     GameInfoDialogComponent,
     UserGameDetailDailogComponent,
+    PlayerBoxComponent,
+    PokerTableComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,88 @@
+@use "sass:math";
+
+  /// @param {Integer} $item-count - Number of items on the circle
+  /// @param {Length} $circle-size - Large circle size
+  /// @param {Length} $item-size - Single item size
+  @mixin on-circle($item-count, $circle-size, $item-size) {  
+    position: relative;
+    width:  $circle-size;
+    height: $circle-size;
+    border-radius: 50%;
+    padding: 0; 
+    list-style: none;
+    
+    > * {
+      display: block;
+      position: absolute;
+      top:  50%; 
+      left: 50%;
+      margin: -(math.div($item-size, 2));
+      width:  $item-size;
+      height: $item-size;
+    
+      $angle: math.div(360, $item-count);
+      $rot: 90;
+  
+      @for $i from 1 through $item-count {
+        &:nth-of-type(#{$i}) {
+          transform: rotate($rot * 1deg) translate(math.div($circle-size, 2)) rotate($rot * -1deg);
+        }
+  
+        $rot: $rot + $angle;
+      }
+    }
+  }
+
+  @mixin circle-outline{
+    margin: 5em auto 0;
+    border: solid 1px yellow;
+  
+    pofri-player-box { 
+      display: block; 
+      max-width: 100%; 
+      border-radius: 10%;
+      border: solid 1px palegreen;
+      transition: .15s;
+    }
+  }
+  
+  .circle-container9 {
+    @include on-circle($item-count: 9, $circle-size: 20em, $item-size: 5em); 
+    @include circle-outline();
+  }
+
+  .circle-container8 {
+    @include on-circle($item-count: 8, $circle-size: 20em, $item-size: 5em); 
+    @include circle-outline();
+  }
+
+  .circle-container7 {
+    @include on-circle($item-count: 7, $circle-size: 20em, $item-size: 5em); 
+    @include circle-outline();
+  }
+
+  .circle-container6 {
+    @include on-circle($item-count: 6, $circle-size: 20em, $item-size: 5em); 
+    @include circle-outline();
+  }
+
+  .circle-container5 {
+    @include on-circle($item-count: 5, $circle-size: 20em, $item-size: 5em); 
+    @include circle-outline();
+  }
+
+  .circle-container4 {
+    @include on-circle($item-count: 4, $circle-size: 20em, $item-size: 5em); 
+    @include circle-outline();
+  }
+
+  .circle-container3 {
+    @include on-circle($item-count: 3, $circle-size: 20em, $item-size: 5em); 
+    @include circle-outline();
+  }
+
+  .circle-container2 {
+    @include on-circle($item-count: 2, $circle-size: 20em, $item-size: 5em); 
+    @include circle-outline();
+  }
+

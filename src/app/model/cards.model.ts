@@ -3,6 +3,11 @@ export interface Card{
     suit: Suit;
 }
 
+export interface MetaCard{
+    url: string;
+    card: Card;
+}
+
 export enum Rank{
     TWO = 2,
     THREE = 3,
@@ -20,8 +25,12 @@ export enum Rank{
 }
 
 export enum Suit{
-    '♥',
-    '♠',
-    '♦',
-    '♣'
+    HEART,
+    CLUB,
+    DIAMOND,
+    SPADE,
+    // '♥',
+    // '♠',
+    // '♦',
+    // '♣'
 }
