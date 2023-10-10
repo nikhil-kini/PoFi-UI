@@ -2,8 +2,8 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs';
-import { Constants, Position } from 'src/app/constants/constants';
-import { Card, MetaCard, Rank, Suit } from 'src/app/model/cards.model';
+import { Constants, Position } from 'src/app/commons/constants/constants';
+import { MetaCard, Rank, Suit } from 'src/app/model/cards.model';
 import { Player, PlayerStatus } from 'src/app/model/player.model';
 import { GameStartDetails } from 'src/app/model/table.model';
 import { GameStartServiceService } from 'src/app/service/game-start-service.service';
@@ -16,6 +16,7 @@ import { UserGameDetailDailogComponent } from './components/user-game-detail-dai
   templateUrl: './nl-holdem.component.html',
   styleUrls: ['./nl-holdem.component.scss']
 })
+
 export class NlHoldemComponent implements OnChanges{
   private breakpointObserver = inject(BreakpointObserver);
   startData = {} as GameStartDetails;
@@ -23,6 +24,8 @@ export class NlHoldemComponent implements OnChanges{
   totalPlayers = parseInt(this.userInfo.userPosition);
   players: Array<Player | null | undefined>;
   currentPlayer: Player | null;
+ 
+
 
   constructor(private gameStartService: GameStartServiceService, private matDialog: MatDialog, private gerenaratePlayerSeatingService: GerenaratePlayerSeatingService) {
     this.players = [];
@@ -34,6 +37,8 @@ export class NlHoldemComponent implements OnChanges{
     this.setData();
     this.createDeck();
   }
+
+  
 
   setData(){
     this.gameStartService.gameStartData$.subscribe(
@@ -110,18 +115,19 @@ export class NlHoldemComponent implements OnChanges{
   cards = this.breakpointObserver.observe(Constants.MOBILE_TRANSITION).pipe(
     map(({ matches }) => {
       if (matches) {
+        //mobile
         return [
           { title: 'Game Engine', cols: 2, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          // { title: 'Card 3', cols: 1, rows: 1 },
+          { title: 'Card 2', cols: 2, rows: 1 },
+          { title: 'Card 3', cols: 2, rows: 2 },
           // { title: 'Card 4', cols: 1, rows: 1 }
         ];
       }
-
+        //desktop
       return [
         { title: 'Game Engine', cols: 1, rows: 1 },
         { title: 'Card 2', cols: 1, rows: 1 },
-        // { title: 'Card 3', cols: 1, rows: 2 },
+        { title: 'Card 3', cols: 2, rows: 2 },
         // { title: 'Card 4', cols: 1, rows: 1 }
       ];
     })
@@ -163,4 +169,5 @@ export class NlHoldemComponent implements OnChanges{
 
     return deck;
   }
+
 }

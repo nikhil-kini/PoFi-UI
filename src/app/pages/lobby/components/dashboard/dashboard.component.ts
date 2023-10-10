@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
-import { Constants } from 'src/app/constants/constants';
+import { Constants } from 'src/app/commons/constants/constants';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { GameInfoDialogComponent } from '../game-info-dialog/game-info-dialog.component';

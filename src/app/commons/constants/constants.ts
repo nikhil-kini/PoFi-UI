@@ -1,7 +1,7 @@
-import { PlayerPosition } from "../model/player.model";
+import { PlayerPosition } from "../../model/player.model";
 
 export abstract class Constants{
-    static readonly MOBILE_TRANSITION = '(max-width: 481px)';
+    static readonly MOBILE_TRANSITION = '(max-width: 600px)';
 }
 
 export abstract class Position{

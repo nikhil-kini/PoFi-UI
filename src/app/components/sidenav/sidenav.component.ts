@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { Constants } from 'src/app/constants/constants';
+import { Constants } from 'src/app/commons/constants/constants';
 
 @Component({
   selector: 'pofri-sidenav',

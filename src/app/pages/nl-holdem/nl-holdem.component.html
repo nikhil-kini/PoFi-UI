@@ -31,9 +31,15 @@
             <button mat-raised-button color="accent" (click)="raise()">Raise</button>
             <button mat-raised-button color="warn" (click)="fold()">Fold</button>
           </ng-template>
+
         </mat-card-content>
+        </mat-card>
+        <mat-card *ngIf="card.title == 'Card 3'">
+          <mat-card-content>
+            <pofri-card-selection-window></pofri-card-selection-window>         
+          </mat-card-content>
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
-  
+

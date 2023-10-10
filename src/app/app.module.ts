@@ -27,6 +27,9 @@ import { UserGameDetailDailogComponent } from './pages/nl-holdem/components/user
 import {MatSelectModule} from '@angular/material/select';
 import { PlayerBoxComponent } from './pages/nl-holdem/components/player-box/player-box.component';
 import { PokerTableComponent } from './pages/nl-holdem/components/poker-table/poker-table.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { CardSelectionWindowComponent } from './pages/nl-holdem/components/card-selection-window/card-selection-window.component';
+import { AddCardComponent } from './pages/nl-holdem/components/add-card/add-card.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,8 @@ import { PokerTableComponent } from './pages/nl-holdem/components/poker-table/po
     UserGameDetailDailogComponent,
     PlayerBoxComponent,
     PokerTableComponent,
+    CardSelectionWindowComponent,
+    AddCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +63,8 @@ import { PokerTableComponent } from './pages/nl-holdem/components/poker-table/po
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   providers: [GameStartServiceService],
   bootstrap: [AppComponent]
