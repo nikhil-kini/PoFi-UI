@@ -30,6 +30,7 @@ import { PokerTableComponent } from './pages/nl-holdem/components/poker-table/po
 import { MatTabsModule } from '@angular/material/tabs';
 import { CardSelectionWindowComponent } from './pages/nl-holdem/components/card-selection-window/card-selection-window.component';
 import { AddCardComponent } from './pages/nl-holdem/components/add-card/add-card.component';
+import { Overlay, OverlayModule } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { AddCardComponent } from './pages/nl-holdem/components/add-card/add-card
     MatInputModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatTabsModule
+    MatTabsModule,
+    OverlayModule
   ],
   providers: [GameStartServiceService],
   bootstrap: [AppComponent]

@@ -7,7 +7,7 @@
     box-shadow: 2px 2px 4px #000000;
 }
 
-#limheight {
+#card-flex {
     display: flex;
     margin: 0.5rem;
     padding: 0.5rem;
@@ -15,7 +15,7 @@
     flex-wrap: wrap;
 }
 
-#limheight div {
+#card-flex div {
     display: inline-block; /*necessary*/
 }
 
@@ -55,7 +55,7 @@ mat-tab-group{
 
     &:hover{
         color: #ffee10;
-        box-shadow: 0 0 0 #ffee10; 
+        box-shadow: 0 0 5px #ffee10; 
     }
 
   }

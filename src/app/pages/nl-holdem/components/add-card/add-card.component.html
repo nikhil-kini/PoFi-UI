@@ -1,5 +1,9 @@
-<div class="card-add">
+<div class="card-add" (click)="toggleAddCardWindow()"  cdkOverlayOrigin #originOverlay="cdkOverlayOrigin">
     <div>
-    <mat-icon>add</mat-icon>
-  </div>
+     <mat-icon>add</mat-icon>
+    </div>
 </div>
+<ng-template cdkOverlayOrigin [cdkConnectedOverlayOrigin]="originOverlay" [cdkConnectedOverlayOpen]="true">
+  <pofri-card-selection-window></pofri-card-selection-window>
+</ng-template>
+
