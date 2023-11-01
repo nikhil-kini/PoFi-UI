@@ -1,30 +1,30 @@
 <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="Hearts ♥">
-      <div id="card-flex">
+  <mat-tab label="Hearts ♥">
+    <div id="card-flex">
       <div class="card-outer" *ngFor="let card of heartCard">
-      <div class="card" [style.background-image]="card.url"></div>
+        <div class="card" [style.background-image]="card.url"></div>
       </div>
     </div>
-    </mat-tab>
-    <mat-tab label="Spade ♠">
-      <div id="card-flex">
-        <div *ngFor="let card of spadeCard">
+  </mat-tab>
+  <mat-tab label="Spade ♠">
+    <div id="card-flex">
+      <div class="card-outer" *ngFor="let card of spadeCard">
         <div class="card" [style.background-image]="card.url"></div>
-        </div>
       </div>
-    </mat-tab>
-    <mat-tab label="Club ♣">
-      <div id="card-flex">
-        <div *ngFor="let card of clubCard">
+    </div>
+  </mat-tab>
+  <mat-tab label="Club ♣">
+    <div id="card-flex">
+      <div class="card-outer" *ngFor="let card of clubCard">
         <div class="card" [style.background-image]="card.url"></div>
-        </div>
       </div>
-    </mat-tab>
-    <mat-tab label="Diamond ♦">
-      <div id="card-flex">
-        <div *ngFor="let card of diamondCard">
+    </div>
+  </mat-tab>
+  <mat-tab label="Diamond ♦">
+    <div id="card-flex">
+      <div class="card-outer" *ngFor="let card of diamondCard">
         <div class="card" [style.background-image]="card.url"></div>
-        </div>
       </div>
-    </mat-tab>
-  </mat-tab-group>
+    </div>
+  </mat-tab>
+</mat-tab-group>

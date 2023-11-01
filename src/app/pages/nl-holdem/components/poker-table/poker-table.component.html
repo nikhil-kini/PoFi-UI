@@ -1,21 +1,25 @@
 <ul
-             [ngClass]="{'circle-container9': checkPlayer9(),
-             'circle-container8': checkPlayer8(),
-             'circle-container7': checkPlayer7(),
-             'circle-container6': checkPlayer6(),
-             'circle-container5': checkPlayer5(),
-             'circle-container4': checkPlayer4(),
-             'circle-container3': checkPlayer3(),
-             'circle-container2': checkPlayer2(),
-            }">
-              <li *ngFor="let player of players"><pofri-player-box [player]="player" [currentPlayer]="currentPlayer"
-                [ngStyle]="{'filter': player?.playerNumber == currentPlayer?.playerNumber ? 'grayscale(0)': 'grayscale(100%)'}"></pofri-player-box></li>
-
-              <!-- <li><img src='https://picsum.photos/seed/picsum/200/300'></li>
-              <li><img src='https://picsum.photos/200/300?grayscale'></li>
-              <li><img src='https://picsum.photos/200/300/?blur'></li>
-              <li><img src='https://picsum.photos/200/300/?blur'></li>
-              <li><img src='https://picsum.photos/200/300/?blur'></li>
-              <li><img src='https://picsum.photos/200/300/?blur'></li>
-              <li><img src='https://picsum.photos/200/300/?blur'></li> -->
+  [ngClass]="{'circle-container9': checkPlayer9(),
+    'circle-container8': checkPlayer8(),
+    'circle-container7': checkPlayer7(),
+    'circle-container6': checkPlayer6(),
+    'circle-container5': checkPlayer5(),
+    'circle-container4': checkPlayer4(),
+    'circle-container3': checkPlayer3(),
+    'circle-container2': checkPlayer2(),
+  }"
+>
+  <li *ngFor="let player of players">
+    <pofri-player-box
+      [player]="player"
+      [currentPlayer]="currentPlayer"
+      [ngStyle]="{
+        filter:
+          player?.playerNumber == currentPlayer?.playerNumber
+            ? 'grayscale(0)'
+            : 'grayscale(100%)'
+      }"
+    >
+    </pofri-player-box>
+  </li>
 </ul>

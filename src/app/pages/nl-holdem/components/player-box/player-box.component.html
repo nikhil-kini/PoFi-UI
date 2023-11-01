@@ -1,9 +1,18 @@
 <mat-card>
-        <h4 [ngStyle]="{'filter': player?.playerNumber == currentPlayer?.playerNumber ? 'grayscale(0)': 'grayscale(100%)'}">{{player?.playerNumber}}</h4>
-        <hr>
-    <div>
-        <p><b>PP: </b> {{player?.playerPosition}}</p>
-        <p><b>BA: </b>100</p>
-        <p><b>PC: </b>{{player?.playerStatus}}</p>
-    </div>
+  <h4
+    [ngStyle]="{
+      filter:
+        player?.playerNumber == currentPlayer?.playerNumber
+          ? 'grayscale(0)'
+          : 'grayscale(100%)'
+    }"
+  >
+    {{ player?.playerNumber }}
+  </h4>
+  <hr />
+  <div>
+    <p><b>PP: </b> {{ player?.playerPosition }}</p>
+    <p><b>BA: </b>100</p>
+    <p><b>PC: </b>{{ player?.playerStatus }}</p>
+  </div>
 </mat-card>

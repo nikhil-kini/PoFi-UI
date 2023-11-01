@@ -8,6 +8,12 @@
     border-radius: 5%;
     color: #666;
     transition: .5s;
+    
+    &.drop-down-input-active{
+        color: #5cff10;
+        box-shadow: 0 0 5px #5cff10;
+        text-shadow: 0 0 5px #5cff10;
+    }
   
     div{
       display: flex;
@@ -48,4 +54,7 @@
       box-shadow: 0 0 5px #ffee10;
       text-shadow: 0 0 5px #ffee10;
     }
+
   }
+
+  

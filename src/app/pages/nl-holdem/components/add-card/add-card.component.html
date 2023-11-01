@@ -1,9 +1,24 @@
-<div class="card-add" (click)="toggleAddCardWindow()"  cdkOverlayOrigin #originOverlay="cdkOverlayOrigin">
-    <div>
-     <mat-icon>add</mat-icon>
-    </div>
+<div
+  tabindex="-1"
+  #cardInput
+  (click)="setfocus()"
+  class="card-add"
+  [class.drop-down-input-active]="(showCardSelectionPanel$ | async)!"
+  cdkOverlayOrigin
+  #originOverlay="cdkOverlayOrigin"
+>
+  <div>
+    <mat-icon>add</mat-icon>
+  </div>
 </div>
-<ng-template cdkOverlayOrigin [cdkConnectedOverlayOrigin]="originOverlay" [cdkConnectedOverlayOpen]="true">
+
+<ng-template
+  cdkConnectedOverlay
+  cdkConnectedOverlayHasBackdrop
+  [cdkConnectedOverlayPositions]="positions"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayOrigin]="originOverlay"
+  [cdkConnectedOverlayOpen]="(showCardSelectionPanel$ | async)!"
+>
   <pofri-card-selection-window></pofri-card-selection-window>
 </ng-template>
-

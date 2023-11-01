@@ -1,34 +1,108 @@
-import { CdkOverlayOrigin, ConnectedPosition, FlexibleConnectedPositionStrategyOrigin, Overlay, OverlayConfig } from '@angular/cdk/overlay';
+import {
+  CdkConnectedOverlay,
+  CdkOverlayOrigin,
+  ConnectedPosition,
+  FlexibleConnectedPositionStrategyOrigin,
+  Overlay,
+  OverlayConfig,
+} from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { Component, Input } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CardSelectionWindowComponent } from '../card-selection-window/card-selection-window.component';
+import { EMPTY, Observable, iif, merge } from 'rxjs';
+import { delay, filter, map, mapTo, switchMap } from 'rxjs/operators';
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'pofri-add-card',
   templateUrl: './add-card.component.html',
-  styleUrls: ['./add-card.component.scss']
+  styleUrls: ['./add-card.component.scss'],
 })
-export class AddCardComponent {
+export class AddCardComponent implements OnInit {
+  showCardSelectionPanel$!: Observable<boolean>;
 
-  constructor(private matDialog: MatDialog, private overlay: Overlay){
+  positions: ConnectedPosition[] = [
+    {
+      originX: 'start',
+      originY: 'bottom',
+      overlayX: 'start',
+      overlayY: 'top',
+      panelClass: 'enough-space-at-left',
+    },
+    {
+      originX: 'center',
+      originY: 'bottom',
+      overlayX: 'center',
+      overlayY: 'top',
+      panelClass: 'enough-space-at-center',
+    },
+    {
+      originX: 'end',
+      originY: 'bottom',
+      overlayX: 'end',
+      overlayY: 'top',
+      panelClass: 'enough-space-at-right',
+    },
+  ];
 
+  @ViewChild('cardInput', { read: ElementRef, static: true })
+  private inputEl!: ElementRef;
+
+  @ViewChild(CdkConnectedOverlay, { static: true })
+  private connectedOverlay!: CdkConnectedOverlay;
+
+  private isCardSelectionPanelVisible$!: Observable<boolean>;
+  private isCardSelectionPanelHidden$!: Observable<boolean>;
+  private isOverlayDetached$!: Observable<void>;
+
+  constructor(
+    private matDialog: MatDialog,
+    private overlay: Overlay,
+    private focusMonitor: FocusMonitor,
+    private renderer: Renderer2
+  ) {}
+
+  setfocus() {
+    setTimeout(() => {
+      this.inputEl.nativeElement.focus();
+    }, 0);
   }
 
-toggleAddCardWindow(){
+  ngOnInit(): void {
+    this.isCardSelectionPanelVisible$ = this.focusMonitor
+      .monitor(this.inputEl)
+      .pipe(
+        filter((focused) => !!focused),
+        map(() => true)
+      );
 
-//   var _dialog = this.matDialog.open(CardSelectionWindowComponent, {
-    
-//     hasBackdrop: false,
-//     data: {
-//       title: 'User Information',
-//     }
-//   });
+    this.isOverlayDetached$ = this.isCardSelectionPanelVisible$.pipe(
+      delay(0),
+      switchMap(() =>
+        iif(
+          () => !!this.connectedOverlay.overlayRef,
+          this.connectedOverlay.overlayRef.detachments(),
+          EMPTY
+        )
+      )
+    );
+    this.isCardSelectionPanelHidden$ = merge(
+      this.isOverlayDetached$,
+      this.connectedOverlay.backdropClick
+    ).pipe(map(() => false));
 
-//   // change userPosition to Total Players
-//   _dialog.afterClosed().subscribe(item => {
-//     console.log(item);
-// });
-
-}
+    this.showCardSelectionPanel$ = merge(
+      this.isCardSelectionPanelHidden$,
+      this.isCardSelectionPanelVisible$
+    );
+  }
 }

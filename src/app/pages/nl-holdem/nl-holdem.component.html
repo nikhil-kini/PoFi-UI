@@ -1,45 +1,56 @@
 <div class="grid-container">
-    <h1 class="mat-h1">No-Limit Holdem</h1>
-    <mat-grid-list cols="2" rowHeight="480px">
-      <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-        <mat-card *ngIf="card.title == 'Game Engine'" class="dashboard-card">
-          <mat-card-header>
-            <mat-card-title>
-              {{userInfo | json}}            
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-            <p>{{currentPlayer?.playerNumber | json}}</p>
+  <h1 class="mat-h1">No-Limit Holdem</h1>
+  <mat-grid-list cols="2" rowHeight="480px">
+    <mat-grid-tile
+      *ngFor="let card of cards | async"
+      [colspan]="card.cols"
+      [rowspan]="card.rows"
+    >
+      <mat-card *ngIf="card.title == 'Game Engine'" class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{ userInfo | json }}
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <p>{{ currentPlayer?.playerNumber | json }}</p>
 
-            <pofri-poker-table [players]="players" [currentPlayer]="currentPlayer"></pofri-poker-table>
-          </mat-card-content>
-            
-        </mat-card>
-        <mat-card *ngIf="card.title == 'Card 2'">
-          <mat-card-header>
-            <mat-card-title>
-              User Actions           
-            </mat-card-title>
-          </mat-card-header>
-          <mat-card-content class="dashboard-card-content">
-          <div *ngIf="currentPlayer?.playerNumber == 1; then us else notUs"></div>
+          <pofri-poker-table
+            [players]="players"
+            [currentPlayer]="currentPlayer"
+          ></pofri-poker-table>
+        </mat-card-content>
+      </mat-card>
+      <mat-card *ngIf="card.title == 'Card 2'">
+        <mat-card-header>
+          <mat-card-title> User Actions </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div
+            *ngIf="currentPlayer?.playerNumber == 1; then us; else notUs"
+          ></div>
           <ng-template #us>
             <button mat-button (click)="getResult()">Result</button>
           </ng-template>
           <ng-template #notUs>
-            <button mat-raised-button color="accent" (click)="call()">Call</button>
-            <button mat-raised-button color="accent" (click)="raise()">Raise</button>
-            <button mat-raised-button color="warn" (click)="fold()">Fold</button>
+            <button mat-raised-button color="accent" (click)="call()">
+              Call
+            </button>
+            <button mat-raised-button color="accent" (click)="raise()">
+              Raise
+            </button>
+            <button mat-raised-button color="warn" (click)="fold()">
+              Fold
+            </button>
           </ng-template>
           <pofri-add-card></pofri-add-card>
         </mat-card-content>
-        </mat-card>
-        <mat-card *ngIf="card.title == 'Card 3'">
-          <mat-card-content>
-            <pofri-card-selection-window></pofri-card-selection-window>         
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-
+      </mat-card>
+      <mat-card *ngIf="card.title == 'Card 3'">
+        <mat-card-content>
+          <pofri-card-selection-window></pofri-card-selection-window>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
