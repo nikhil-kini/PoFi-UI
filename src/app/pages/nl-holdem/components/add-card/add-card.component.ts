@@ -1,26 +1,13 @@
 import {
   CdkConnectedOverlay,
-  CdkOverlayOrigin,
   ConnectedPosition,
-  FlexibleConnectedPositionStrategyOrigin,
-  Overlay,
-  OverlayConfig,
+  ScrollStrategy,
+  ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  Renderer2,
-  ViewChild,
-} from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { CardSelectionWindowComponent } from '../card-selection-window/card-selection-window.component';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EMPTY, Observable, iif, merge } from 'rxjs';
-import { delay, filter, map, mapTo, switchMap } from 'rxjs/operators';
+import { delay, filter, map, switchMap } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { MatInput } from '@angular/material/input';
 
 @Component({
   selector: 'pofri-add-card',
@@ -30,6 +17,7 @@ import { MatInput } from '@angular/material/input';
 export class AddCardComponent implements OnInit {
   showCardSelectionPanel$!: Observable<boolean>;
 
+  scrollStratagy!: ScrollStrategy;
   positions: ConnectedPosition[] = [
     {
       originX: 'start',
@@ -65,10 +53,8 @@ export class AddCardComponent implements OnInit {
   private isOverlayDetached$!: Observable<void>;
 
   constructor(
-    private matDialog: MatDialog,
-    private overlay: Overlay,
     private focusMonitor: FocusMonitor,
-    private renderer: Renderer2
+    private scrollStratagies: ScrollStrategyOptions
   ) {}
 
   setfocus() {
@@ -78,6 +64,7 @@ export class AddCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.scrollStratagy = this.scrollStratagies.reposition();
     this.isCardSelectionPanelVisible$ = this.focusMonitor
       .monitor(this.inputEl)
       .pipe(
