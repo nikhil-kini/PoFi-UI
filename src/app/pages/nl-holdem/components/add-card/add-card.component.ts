@@ -8,6 +8,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { EMPTY, Observable, iif, merge } from 'rxjs';
 import { delay, filter, map, switchMap } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { MetaCard } from 'src/app/model/cards.model';
 
 @Component({
   selector: 'pofri-add-card',
@@ -15,6 +16,8 @@ import { FocusMonitor } from '@angular/cdk/a11y';
   styleUrls: ['./add-card.component.scss'],
 })
 export class AddCardComponent implements OnInit {
+  cardHolder$!: MetaCard;
+
   showCardSelectionPanel$!: Observable<boolean>;
 
   scrollStratagy!: ScrollStrategy;
@@ -91,5 +94,9 @@ export class AddCardComponent implements OnInit {
       this.isCardSelectionPanelHidden$,
       this.isCardSelectionPanelVisible$
     );
+  }
+
+  selectCard(card: MetaCard) {
+    this.cardHolder$ = card;
   }
 }

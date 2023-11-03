@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CommonService } from 'src/app/commons/service/common.service';
 import { MetaCard, Suit } from 'src/app/model/cards.model';
 
@@ -13,6 +13,8 @@ export class CardSelectionWindowComponent {
   clubCard: MetaCard[] | undefined;
   diamondCard: MetaCard[] | undefined;
 
+  @Output() selectedCard = new EventEmitter<MetaCard>();
+
   constructor(private commonService: CommonService) {}
 
   ngOnInit() {
@@ -20,5 +22,9 @@ export class CardSelectionWindowComponent {
     this.spadeCard = this.commonService.createCardStackOfSuit(Suit.SPADE);
     this.clubCard = this.commonService.createCardStackOfSuit(Suit.CLUB);
     this.diamondCard = this.commonService.createCardStackOfSuit(Suit.DIAMOND);
+  }
+
+  selectCard(card: MetaCard) {
+    this.selectedCard.emit(card);
   }
 }

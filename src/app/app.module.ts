@@ -22,7 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { GameInfoDialogComponent } from './pages/lobby/components/game-info-dialog/game-info-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { GameStartServiceService } from './service/game-start-service.service';
+import { GameStartInfoService } from './service/game-start-info.service';
 import { UserGameDetailDailogComponent } from './pages/nl-holdem/components/user-game-detail-dailog/user-game-detail-dailog.component';
 import { MatSelectModule } from '@angular/material/select';
 import { PlayerBoxComponent } from './pages/nl-holdem/components/player-box/player-box.component';
@@ -70,7 +70,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     OverlayModule,
     ScrollingModule,
   ],
-  providers: [GameStartServiceService],
+  providers: [GameStartInfoService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

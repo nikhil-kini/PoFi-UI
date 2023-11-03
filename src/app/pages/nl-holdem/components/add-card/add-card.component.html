@@ -7,9 +7,10 @@
   cdkOverlayOrigin
   #originOverlay="cdkOverlayOrigin"
 >
-  <div>
+  <div *ngIf="!cardHolder$">
     <mat-icon>add</mat-icon>
   </div>
+  <div *ngIf="cardHolder$" [style.background-image]="cardHolder$.url"></div>
 </div>
 
 <ng-template
@@ -22,5 +23,7 @@
   [cdkConnectedOverlayOrigin]="originOverlay"
   [cdkConnectedOverlayOpen]="(showCardSelectionPanel$ | async)!"
 >
-  <pofri-card-selection-window></pofri-card-selection-window>
+  <pofri-card-selection-window
+    (selectedCard)="selectCard($event)"
+  ></pofri-card-selection-window>
 </ng-template>

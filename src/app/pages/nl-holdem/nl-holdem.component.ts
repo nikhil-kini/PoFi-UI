@@ -4,24 +4,26 @@ import {
   inject,
   Input,
   OnChanges,
+  OnDestroy,
   SimpleChanges,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Constants, Position } from 'src/app/commons/constants/constants';
 import { MetaCard, Rank, Suit } from 'src/app/model/cards.model';
 import { Player, PlayerStatus } from 'src/app/model/player.model';
 import { GameStartDetails } from 'src/app/model/table.model';
-import { GameStartServiceService } from 'src/app/service/game-start-service.service';
+import { GameStartInfoService } from 'src/app/service/game-start-info.service';
 import { GerenaratePlayerSeatingService } from 'src/app/service/gerenarate-player-seating.service';
 import { UserGameDetailDailogComponent } from './components/user-game-detail-dailog/user-game-detail-dailog.component';
+import { GameTableService } from 'src/app/service/game-table.service';
 
 @Component({
   selector: 'pofri-nl-holdem',
   templateUrl: './nl-holdem.component.html',
   styleUrls: ['./nl-holdem.component.scss'],
 })
-export class NlHoldemComponent implements OnChanges {
+export class NlHoldemComponent {
   private breakpointObserver = inject(BreakpointObserver);
   startData = {} as GameStartDetails;
   userInfo = { userPosition: '5' };
@@ -29,33 +31,40 @@ export class NlHoldemComponent implements OnChanges {
   players: Array<Player | null | undefined>;
   currentPlayer: Player | null;
 
+  observerGTS$: Observable<GameTableService>;
+
   constructor(
-    private gameStartService: GameStartServiceService,
+    private gameStartInfoService: GameStartInfoService,
     private matDialog: MatDialog,
-    private gerenaratePlayerSeatingService: GerenaratePlayerSeatingService
+    private gerenaratePlayerSeatingService: GerenaratePlayerSeatingService,
+    private gameTableService: GameTableService
   ) {
     this.players = [];
     this.currentPlayer = null;
+    this.observerGTS$ = new Observable((observer) => {
+      observer.next(gameTableService);
+    });
   }
 
   ngOnInit() {
     this.onOpenDialogPageStart();
     this.setData();
-    this.createDeck();
   }
 
   setData() {
-    this.gameStartService.gameStartData$.subscribe((data) => {
+    this.gameStartInfoService.gameStartData$.subscribe((data) => {
       this.startData = data as GameStartDetails;
     });
-    this.gameStartService.gameUserInfoData$.subscribe((data) => {
+    this.gameStartInfoService.gameUserInfoData$.subscribe((data) => {
       this.userInfo = data;
     });
   }
 
   getResult() {
     console.log('do this do that');
-    this.currentPlayer = this.getNext(this.currentPlayer!);
+    // this.currentPlayer = this.getNext(this.currentPlayer!);
+    this.gameTableService.playerAction(PlayerStatus.NA);
+    this.currentPlayer = this.gameTableService.currentPlayer$;
   }
 
   onOpenDialogPageStart() {
@@ -70,45 +79,46 @@ export class NlHoldemComponent implements OnChanges {
     // change userPosition to Total Players
     _dialog.afterClosed().subscribe((item) => {
       console.log(item);
+      console.log('--------------------');
       console.log(this.userInfo);
 
       let totalPlayers = parseInt(this.userInfo.userPosition);
 
-      let playerPosition = Position.PLAYER_POSITION[totalPlayers];
-
-      for (let index = 1; index <= totalPlayers; index++) {
-        this.gerenaratePlayerSeatingService.addPlayer(
-          index,
-          playerPosition[index - 1]
-        );
-        console.log('player added');
-        console.log(this.gerenaratePlayerSeatingService);
-      }
-      this.players = this.gerenaratePlayerSeatingService.toArray();
-      this.currentPlayer = this.gerenaratePlayerSeatingService.head;
+      this.gameTableService.createTable(totalPlayers, 2);
+      // this.gameTableService.observerGPS$.subscribe(
+      //   (val) => (this.players = val.toArray(this.gameTableService.userPlayer$))
+      // );
+      this.players = this.gameTableService.tablePlayers$;
+      this.observerGTS$.subscribe(
+        (value) => (this.currentPlayer = value.currentPlayer$)
+      );
+      // this.players = this.gerenaratePlayerSeatingService.toArray();
+      // this.currentPlayer = this.gerenaratePlayerSeatingService.head;
     });
   }
 
   call() {
-    this.currentPlayer!.playerStatus = PlayerStatus.CALL;
-    this.currentPlayer = this.getNext(this.currentPlayer!);
-    this.players = this.gerenaratePlayerSeatingService.toArray();
+    this.gameTableService.playerAction(PlayerStatus.CALL);
+    this.currentPlayer = this.gameTableService.currentPlayer$;
+    // this.currentPlayer!.playerStatus = PlayerStatus.CALL;
+    // this.currentPlayer = this.getNext(this.currentPlayer!);
+    // this.players = this.gerenaratePlayerSeatingService.toArray();
   }
 
   raise() {
-    this.currentPlayer!.playerStatus = PlayerStatus.RAISE;
-    this.currentPlayer = this.getNext(this.currentPlayer!);
-    this.players = this.gerenaratePlayerSeatingService.toArray();
+    this.gameTableService.playerAction(PlayerStatus.RAISE);
+    this.currentPlayer = this.gameTableService.currentPlayer$;
+    // this.currentPlayer!.playerStatus = PlayerStatus.RAISE;
+    // this.currentPlayer = this.getNext(this.currentPlayer!);
+    // this.players = this.gerenaratePlayerSeatingService.toArray();
   }
 
   fold() {
-    this.currentPlayer!.playerStatus = PlayerStatus.FOLD;
-    this.currentPlayer = this.getNext(this.currentPlayer!);
-    this.players = this.gerenaratePlayerSeatingService.toArray();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
+    this.gameTableService.playerAction(PlayerStatus.FOLD);
+    this.currentPlayer = this.gameTableService.currentPlayer$;
+    // this.currentPlayer!.playerStatus = PlayerStatus.FOLD;
+    // this.currentPlayer = this.getNext(this.currentPlayer!);
+    // this.players = this.gerenaratePlayerSeatingService.toArray();
   }
 
   /** Based on the screen size, switch from standard to one column per row */
@@ -146,32 +156,5 @@ export class NlHoldemComponent implements OnChanges {
       nextPlayer = this.getNext(nextPlayer);
 
     return nextPlayer;
-  }
-
-  createDeck(): Array<MetaCard> {
-    let suit = Object.values(Suit).filter((x) => !isNaN(Number(x)));
-    let rank = Object.values(Rank).filter((x) => !isNaN(Number(x)));
-
-    let deck: MetaCard[] = [];
-    suit.forEach((s) => {
-      rank.forEach((r) => {
-        deck.push({
-          url:
-            "url('img/card_faces/" +
-            Suit[s as Suit].toLowerCase() +
-            '_' +
-            r +
-            ".svg')",
-          card: {
-            rank: r as Rank,
-            suit: s as Suit,
-          },
-        });
-      });
-    });
-
-    console.log(deck);
-
-    return deck;
   }
 }

@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class GameStartServiceService {
-
-  constructor() { }
+export class GameStartInfoService {
+  constructor() {}
 
   private gameStartDataSource = new BehaviorSubject<any>({});
   private gameUserInfoSource = new BehaviorSubject<any>({});
@@ -14,12 +13,12 @@ export class GameStartServiceService {
   gameStartData$ = this.gameStartDataSource.asObservable();
   gameUserInfoData$ = this.gameUserInfoSource.asObservable();
 
-  setGameStartData(data: any){
+  setGameStartData(data: any) {
     // console.log(data);
     this.gameStartDataSource.next(data);
   }
 
-  setGameUserInfoData(data: any){
+  setGameUserInfoData(data: any) {
     this.gameUserInfoSource.next(data);
   }
 }
