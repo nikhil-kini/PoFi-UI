@@ -1,4 +1,5 @@
 <div *ngIf="checkUser(); then us; else notUs"></div>
+<h2>Tabel round: {{ getRound() }}</h2>
 <ng-template #us>
   <button mat-button (click)="getResult()">Result</button>
 </ng-template>

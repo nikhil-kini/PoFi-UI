@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Player, PlayerStatus } from '../model/player.model';
-import { MetaCard, Rank, Suit } from '../model/cards.model';
+import { MetaCard } from '../model/cards.model';
 import { CommonService } from '../commons/service/common.service';
 import { GerenaratePlayerSeatingService } from './gerenarate-player-seating.service';
 import { Position } from '../commons/constants/constants';
-import { Observable } from 'rxjs';
+import { Round } from '../model/table.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +15,7 @@ export class GameTableService {
   startPlayer$!: Player | null;
   tableDeck$!: MetaCard[];
   tablePlayers$!: Array<Player | null | undefined>;
-
-  observerCurrentPlayer$: Observable<Player> = new Observable();
+  tableRound$!: Round;
 
   constructor(
     private commonService: CommonService,
@@ -51,6 +50,7 @@ export class GameTableService {
     this.currentPlayer$ = this.startPlayer$;
 
     this.tableDeck$ = this.commonService.createDeck();
+    this.tableRound$ = 0;
   }
 
   /**
@@ -59,8 +59,22 @@ export class GameTableService {
    */
   playerAction(playerStatus: PlayerStatus) {
     this.currentPlayer$!.playerStatus = playerStatus;
+    if (playerStatus === PlayerStatus.RAISE) {
+      this.startPlayer$ = this.currentPlayer$;
+    }
+    this.changeCurrentPlayerToNextAndUpdateRound();
+  }
+
+  changeCurrentPlayerToNextAndUpdateRound() {
+    if (this.currentPlayer$?.nextPlayer === this.startPlayer$) {
+      if (this.tableRound$ === Round.RIVER.valueOf()) {
+        //Impl logic
+        console.log('GAME END');
+      } else {
+        this.tableRound$ += 1;
+      }
+    }
     this.currentPlayer$ = this.getNext(this.currentPlayer$!);
-    console.log(this.currentPlayer$);
   }
 
   /**

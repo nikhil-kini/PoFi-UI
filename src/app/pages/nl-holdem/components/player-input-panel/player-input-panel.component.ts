@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PlayerStatus } from 'src/app/model/player.model';
+import { Round } from 'src/app/model/table.model';
 import { GameTableService } from 'src/app/service/game-table.service';
 
 @Component({
@@ -10,10 +11,16 @@ import { GameTableService } from 'src/app/service/game-table.service';
 export class PlayerInputPanelComponent {
   constructor(private gameTS: GameTableService) {}
 
+  ngOnInit() {}
+
   checkUser(): boolean {
     return this.gameTS.currentPlayer$ === this.gameTS.userPlayer$
       ? true
       : false;
+  }
+
+  getRound(): string {
+    return Round[this.gameTS.tableRound$];
   }
 
   getResult() {
