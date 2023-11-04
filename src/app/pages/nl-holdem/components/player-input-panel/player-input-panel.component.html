@@ -1,0 +1,9 @@
+<div *ngIf="checkUser(); then us; else notUs"></div>
+<ng-template #us>
+  <button mat-button (click)="getResult()">Result</button>
+</ng-template>
+<ng-template #notUs>
+  <button mat-raised-button color="accent" (click)="call()">Call</button>
+  <button mat-raised-button color="accent" (click)="raise()">Raise</button>
+  <button mat-raised-button color="warn" (click)="fold()">Fold</button>
+</ng-template>

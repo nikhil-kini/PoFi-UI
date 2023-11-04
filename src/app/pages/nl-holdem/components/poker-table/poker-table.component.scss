@@ -35,15 +35,9 @@
 
   @mixin circle-outline{
     margin: 5em auto 0;
-    border: solid 1px yellow;
+    border: solid 1px #ffee10;
+    box-shadow: 0 0 5px #ffee10;
   
-    pofri-player-box { 
-      display: block; 
-      max-width: 100%; 
-      border-radius: 10%;
-      border: solid 1px palegreen;
-      transition: .15s;
-    }
   }
   
   .circle-container9 {

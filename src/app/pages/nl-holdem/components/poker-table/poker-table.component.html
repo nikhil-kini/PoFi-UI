@@ -9,17 +9,7 @@
     'circle-container2': checkPlayer2(),
   }"
 >
-  <li *ngFor="let player of players">
-    <pofri-player-box
-      [player]="player"
-      [currentPlayer]="currentPlayer"
-      [ngStyle]="{
-        filter:
-          player?.playerNumber == currentPlayer?.playerNumber
-            ? 'grayscale(0)'
-            : 'grayscale(100%)'
-      }"
-    >
-    </pofri-player-box>
+  <li *ngFor="let player of tabelPlayers$">
+    <pofri-player-box [player]="player"> </pofri-player-box>
   </li>
 </ul>

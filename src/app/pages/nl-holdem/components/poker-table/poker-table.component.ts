@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Player } from 'src/app/model/player.model';
+import { GameTableService } from 'src/app/service/game-table.service';
 
 @Component({
   selector: 'pofri-poker-table',
@@ -7,39 +8,39 @@ import { Player } from 'src/app/model/player.model';
   styleUrls: ['./poker-table.component.scss'],
 })
 export class PokerTableComponent {
-  @Input() players: Array<Player | null | undefined> | undefined;
-  @Input() currentPlayer: Player | null | undefined;
-  totalPlayers: number | undefined;
+  tabelPlayers$!: Array<Player | null | undefined>;
+  totalPlayersCount$: number | undefined;
 
-  constructor() {}
+  constructor(private gameTS: GameTableService) {}
 
   ngOnInit() {
-    this.totalPlayers = this.players?.length;
+    this.tabelPlayers$ = this.gameTS.tablePlayers$;
+    this.totalPlayersCount$ = this.gameTS.tablePlayers$.length;
   }
 
   checkPlayer9(): boolean {
-    return this.totalPlayers == 9;
+    return this.totalPlayersCount$ == 9;
   }
 
   checkPlayer8(): boolean {
-    return this.totalPlayers == 8;
+    return this.totalPlayersCount$ == 8;
   }
   checkPlayer7(): boolean {
-    return this.totalPlayers == 7;
+    return this.totalPlayersCount$ == 7;
   }
   checkPlayer6(): boolean {
-    return this.totalPlayers == 6;
+    return this.totalPlayersCount$ == 6;
   }
   checkPlayer5(): boolean {
-    return this.totalPlayers == 5;
+    return this.totalPlayersCount$ == 5;
   }
   checkPlayer4(): boolean {
-    return this.totalPlayers == 4;
+    return this.totalPlayersCount$ == 4;
   }
   checkPlayer3(): boolean {
-    return this.totalPlayers == 3;
+    return this.totalPlayersCount$ == 3;
   }
   checkPlayer2(): boolean {
-    return this.totalPlayers == 2;
+    return this.totalPlayersCount$ == 2;
   }
 }

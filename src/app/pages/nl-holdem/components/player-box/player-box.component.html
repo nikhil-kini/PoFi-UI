@@ -1,11 +1,11 @@
 <mat-card>
   <h4
-    [ngStyle]="{
-      filter:
-        player?.playerNumber == currentPlayer?.playerNumber
-          ? 'grayscale(0)'
-          : 'grayscale(100%)'
-    }"
+    [ngStyle]="
+      (checkCurrentPlayer() && {
+        color: 'red'
+      }) ||
+      null
+    "
   >
     {{ player?.playerNumber }}
   </h4>

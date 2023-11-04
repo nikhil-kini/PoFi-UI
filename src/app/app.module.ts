@@ -32,6 +32,7 @@ import { CardSelectionWindowComponent } from './pages/nl-holdem/components/card-
 import { AddCardComponent } from './pages/nl-holdem/components/add-card/add-card.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { PlayerInputPanelComponent } from './pages/nl-holdem/components/player-input-panel/player-input-panel.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     PokerTableComponent,
     CardSelectionWindowComponent,
     AddCardComponent,
+    PlayerInputPanelComponent,
   ],
   imports: [
     BrowserModule,
