@@ -4,11 +4,18 @@ import {
   ScrollStrategy,
   ScrollStrategyOptions,
 } from '@angular/cdk/overlay';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { EMPTY, Observable, iif, merge } from 'rxjs';
 import { delay, filter, map, switchMap } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { MetaCard } from 'src/app/model/cards.model';
+import { Card, MetaCard } from 'src/app/model/cards.model';
 
 @Component({
   selector: 'pofri-add-card',
@@ -16,10 +23,10 @@ import { MetaCard } from 'src/app/model/cards.model';
   styleUrls: ['./add-card.component.scss'],
 })
 export class AddCardComponent implements OnInit {
+  @Output() selctedCard = new EventEmitter<Card>();
+
   cardHolder$!: MetaCard;
-
   showCardSelectionPanel$!: Observable<boolean>;
-
   scrollStratagy!: ScrollStrategy;
   positions: ConnectedPosition[] = [
     {
@@ -98,5 +105,6 @@ export class AddCardComponent implements OnInit {
 
   selectCard(card: MetaCard) {
     this.cardHolder$ = card;
+    this.selctedCard.emit(card.card);
   }
 }

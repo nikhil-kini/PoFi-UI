@@ -33,6 +33,7 @@ import { AddCardComponent } from './pages/nl-holdem/components/add-card/add-card
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PlayerInputPanelComponent } from './pages/nl-holdem/components/player-input-panel/player-input-panel.component';
+import { PlayerCardInputPanelComponent } from './pages/nl-holdem/components/player-card-input-panel/player-card-input-panel.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { PlayerInputPanelComponent } from './pages/nl-holdem/components/player-i
     CardSelectionWindowComponent,
     AddCardComponent,
     PlayerInputPanelComponent,
+    PlayerCardInputPanelComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,66 +1,23 @@
-<form  [formGroup]="userDetails" (ngSubmit)="saveUserInfo()">
-    <h1 mat-dialog-title>{{data.title}}</h1>
-    <div mat-dialog-content>
-        <h4>Player Seat Position</h4>
-        <p>
-            <mat-form-field appearance="fill" color="accent">
-                <mat-label>Your Seat Position</mat-label>
-                <input matInput formControlName="userPosition" placeholder="Number 1-9">
-                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                <mat-hint>Your place in the table, counting from small blind.</mat-hint>
-            </mat-form-field>
-        </p>
+<form [formGroup]="userDetails" (ngSubmit)="saveUserInfo()">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+  <div mat-dialog-content>
+    <h4>Player Seat Position</h4>
+    <p>
+      <mat-form-field appearance="fill" color="accent">
+        <mat-label>Your Seat Position</mat-label>
+        <input
+          matInput
+          formControlName="userPosition"
+          placeholder="Number 1-9"
+        />
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+        <mat-hint>Your place in the table, counting from small blind.</mat-hint>
+      </mat-form-field>
+    </p>
+  </div>
 
-        <!-- <h4>User Card 1</h4>
-        <p  formGroupName="card1">
-        <mat-form-field>
-            <mat-label>Suit</mat-label>
-            <mat-select formControlName="suit">
-                <mat-option *ngFor="let key of suitModes" [value]="key">
-                    {{suitEnums[key]}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Rank</mat-label>
-            <mat-select formControlName="rank">
-                <mat-option *ngFor="let key of rankModes" [value]="key">
-                    {{rankEnums[key]}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        </p>
-
-        <h4>User Card 2</h4>
-        <p formGroupName="card2">
-        <mat-form-field >
-            <mat-label>Suit</mat-label>
-            <mat-select formControlName="suit">
-                <mat-option *ngFor="let key of suitModes" [value]="key">
-                    {{suitEnums[key]}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-            <mat-label>Rank</mat-label>
-            <mat-select formControlName="rank">
-                <mat-option *ngFor="let key of rankModes" [value]="key">
-                    {{rankEnums[key]}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
-        </p> -->
-        <h4>User Cards</h4>
-        <div class="add-card-flex">
-            <pofri-add-card></pofri-add-card>
-            <pofri-add-card></pofri-add-card>
-        </div>
-        
-    </div>
-
-    <div mat-dialog-actions class="action">
-        <button mat-raised-button id="green" (click)="saveUserInfo()">Save</button>
-        <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
-    </div>
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button id="green" (click)="saveUserInfo()">Save</button>
+    <button mat-raised-button color="warn" (click)="cancel()">Cancel</button>
+  </div>
 </form>
-    

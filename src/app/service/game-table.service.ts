@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Player, PlayerStatus } from '../model/player.model';
-import { MetaCard } from '../model/cards.model';
+import { Card, MetaCard } from '../model/cards.model';
 import { CommonService } from '../commons/service/common.service';
 import { GerenaratePlayerSeatingService } from './gerenarate-player-seating.service';
 import { Position } from '../commons/constants/constants';
@@ -16,6 +16,8 @@ export class GameTableService {
   tableDeck$!: MetaCard[];
   tablePlayers$!: Array<Player | null | undefined>;
   tableRound$!: Round;
+  boardCards$!: Card[];
+  userCards$!: Card[];
 
   constructor(
     private commonService: CommonService,
