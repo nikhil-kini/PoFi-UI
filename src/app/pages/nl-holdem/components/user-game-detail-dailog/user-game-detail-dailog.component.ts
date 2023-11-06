@@ -27,7 +27,10 @@ export class UserGameDetailDailogComponent {
   saveUserInfo() {
     console.log(this.userDetails.value);
     this.closePopUp('Save close');
-    this.gameStartInfoService.setGameUserInfoData(this.userDetails.value);
+    let userPositionVar = Number(this.userDetails.value.userPosition);
+    this.gameStartInfoService.setGameUserInfoData({
+      userPosition: userPositionVar,
+    });
   }
 
   cancel() {

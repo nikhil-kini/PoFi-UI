@@ -9,6 +9,9 @@ import { GameTableService } from 'src/app/service/game-table.service';
   styleUrls: ['./player-input-panel.component.scss'],
 })
 export class PlayerInputPanelComponent {
+  handCateory!: any;
+  decision!: any;
+  handCombination!: any;
   constructor(private gameTS: GameTableService) {}
 
   ngOnInit() {}
@@ -24,6 +27,15 @@ export class PlayerInputPanelComponent {
   }
 
   getResult() {
+    let handCategory = this.gameTS.getHandCategory();
+    let decision = this.gameTS.getDecision();
+    let handCombination = this.gameTS.getHandCombination();
+    handCategory.subscribe((val) => (this.handCateory = val));
+    decision.subscribe((val) => (this.decision = val));
+    handCombination.subscribe((val) => (this.handCombination = val));
+  }
+
+  continue() {
     this.gameTS.playerAction(PlayerStatus.NA);
   }
 

@@ -8,13 +8,11 @@
     >
       <mat-card *ngIf="card.title == 'Game Engine'" class="dashboard-card">
         <mat-card-header>
-          <mat-card-title>
-            {{ userInfo | json }}
-          </mat-card-title>
+          <mat-card-title> HI DEMO </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <p>{{ currentPlayer?.playerNumber | json }}</p>
-
+          <p>DEMO 2</p>
+          <div *ngIf="isActive"></div>
           <pofri-poker-table></pofri-poker-table>
         </mat-card-content>
       </mat-card>

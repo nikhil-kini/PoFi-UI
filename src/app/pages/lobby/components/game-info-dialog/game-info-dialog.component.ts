@@ -2,8 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { GameStartDetails } from 'src/app/model/table.model';
-import { GameStartInfoService } from 'src/app/service/game-start-info.service';
+import {
+  GameStartDetails,
+  GameStartInfoService,
+} from 'src/app/service/game-start-info.service';
 
 @Component({
   selector: 'pofri-game-info-dialog',

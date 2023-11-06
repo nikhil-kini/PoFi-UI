@@ -34,7 +34,7 @@ export class PlayerCardInputPanelComponent {
       this.userCardSelectionArray$.push({ id, card });
     }
     console.log(this.userCardSelectionArray$);
-    this.gameTS.userCards$ = this.boardCardSelectionArray$.flatMap(
+    this.gameTS.userCards$ = this.userCardSelectionArray$.flatMap(
       (obj) => obj.card
     );
   }

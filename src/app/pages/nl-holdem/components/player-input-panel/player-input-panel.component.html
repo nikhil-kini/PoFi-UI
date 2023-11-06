@@ -1,7 +1,26 @@
 <div *ngIf="checkUser(); then us; else notUs"></div>
 <h2>Tabel round: {{ getRound() }}</h2>
 <ng-template #us>
+  <mat-card *ngIf="handCateory">
+    <mat-card-header>Hand Category</mat-card-header>
+    <mat-card-content
+      ><p>{{ handCateory | json }}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="decision">
+    <mat-card-header>Decision</mat-card-header>
+    <mat-card-content
+      ><p>{{ decision | json }}</p>
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="handCombination">
+    <mat-card-header>Hand Combination</mat-card-header>
+    <mat-card-content
+      ><p>{{ handCombination | json }}</p>
+    </mat-card-content>
+  </mat-card>
   <button mat-button (click)="getResult()">Result</button>
+  <button mat-button (click)="continue()">Continue</button>
 </ng-template>
 <ng-template #notUs>
   <button mat-raised-button color="accent" (click)="call()">Call</button>

@@ -6,15 +6,6 @@ export interface GameTable {
   playState: PlayState;
 }
 
-export interface GameStartDetails {
-  profileName: string;
-  websiteName: string;
-  tableSeats: number;
-  anteAmount: number;
-  smallBet: number;
-  bigBet: number;
-}
-
 export enum GameType {
   TIGHT,
   LOOSE,

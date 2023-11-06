@@ -34,6 +34,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PlayerInputPanelComponent } from './pages/nl-holdem/components/player-input-panel/player-input-panel.component';
 import { PlayerCardInputPanelComponent } from './pages/nl-holdem/components/player-card-input-panel/player-card-input-panel.component';
+import { HttpClientModule } from '@angular/common/http';
+import { GameTableService } from './service/game-table.service';
 
 @NgModule({
   declarations: [
@@ -73,8 +75,9 @@ import { PlayerCardInputPanelComponent } from './pages/nl-holdem/components/play
     MatTabsModule,
     OverlayModule,
     ScrollingModule,
+    HttpClientModule,
   ],
-  providers: [GameStartInfoService],
+  providers: [GameStartInfoService, GameTableService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
