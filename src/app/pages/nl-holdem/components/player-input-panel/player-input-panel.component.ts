@@ -44,7 +44,7 @@ export class PlayerInputPanelComponent {
   }
 
   raise() {
-    this.gameTS.playerAction(PlayerStatus.RAISE);
+    this.gameTS.playerAction(PlayerStatus.RAISE, 5);
   }
 
   fold() {

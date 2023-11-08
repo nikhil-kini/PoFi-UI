@@ -83,6 +83,9 @@ export class GameTableService {
     this.currentPlayer$ = this.getNext(this.currentPlayer$!);
     this.currentPlayer$!.playerBet = this.bigBet$;
     this.currentPlayer$ = this.getNext(this.currentPlayer$!);
+    this.tableRunningBet$ = this.bigBet$;
+    this.tablePot$ =
+      this.bigBet$ + this.smallBet$ + this.tableAnte$ * this.totalPlayers$;
 
     this.tableDeck$ = this.commonService.createDeck();
     this.tableRound$ = 0;
@@ -98,11 +101,32 @@ export class GameTableService {
    *
    * @param playerStatus palyer status to be updated for current player.
    */
-  playerAction(playerStatus: PlayerStatus) {
+  playerAction(playerStatus: PlayerStatus, addAmount?: number) {
     this.currentPlayer$!.playerStatus = playerStatus;
-    if (playerStatus === PlayerStatus.RAISE) {
-      this.startPlayer$ = this.currentPlayer$;
+    switch (playerStatus) {
+      case PlayerStatus.NA:
+        break;
+      case PlayerStatus.CHECK:
+        break;
+      case PlayerStatus.BET:
+        this.tableRunningBet$ = addAmount!;
+        break;
+      case PlayerStatus.CALL:
+        let diff = this.tableRunningBet$ - this.currentPlayer$!.playerBet;
+        this.tablePot$ += diff;
+        this.currentPlayer$!.playerBet = this.tableRunningBet$;
+        break;
+      case PlayerStatus.RAISE:
+        this.startPlayer$ = this.currentPlayer$;
+        this.tableRunningBet$ += addAmount!;
+        this.tablePot$ += this.tableRunningBet$;
+        this.currentPlayer$!.playerBet = this.tableRunningBet$;
+        break;
+      case PlayerStatus.FOLD:
+        this.totalPlayers$ -= 1;
+        break;
     }
+
     this.changeCurrentPlayerToNextAndUpdateRound();
   }
 
@@ -110,11 +134,15 @@ export class GameTableService {
     if (this.currentPlayer$?.nextPlayer === this.startPlayer$) {
       if (this.tableRound$ === Round.RIVER.valueOf()) {
         //Impl logic
-        console.log('GAME END');
+        alert('Game end');
       } else {
         this.tableRound$ += 1;
         this.tablePlayState$ = 0;
         this.currentPlayer$ = this.tableSmallBlint$;
+        this.startPlayer$ = this.currentPlayer$;
+        this.tablePot$ += this.tableAnte$ * this.totalPlayers$;
+        this.tableRunningBet$ = 0;
+        this.gerenaratePlayerSeatingService.softResetPlayers();
       }
     } else {
       this.currentPlayer$ = this.getNext(this.currentPlayer$!);
@@ -166,8 +194,8 @@ export class GameTableService {
           return { suit: Suit[value.suit], rank: Rank[value.rank] };
         }),
         gameLevel: Round[this.tableRound$],
-        potValue: 152,
-        betValue: 10,
+        potValue: this.tablePot$,
+        betValue: this.tableRunningBet$,
       });
     }
   }

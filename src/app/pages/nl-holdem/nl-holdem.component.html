@@ -8,26 +8,29 @@
     >
       <mat-card *ngIf="card.title == 'Game Engine'" class="dashboard-card">
         <mat-card-header>
-          <mat-card-title> HI DEMO </mat-card-title>
+          <mat-card-title> Poker Table </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <p>DEMO 2</p>
-          <div *ngIf="isActive"></div>
-          <pofri-poker-table></pofri-poker-table>
+          <pofri-poker-table
+            [tabelPlayers]="players$"
+            [totalPlayersCount]="playersCount$"
+          ></pofri-poker-table>
         </mat-card-content>
       </mat-card>
       <mat-card *ngIf="card.title == 'Card 2'">
         <mat-card-header>
-          <mat-card-title> User Actions </mat-card-title>
+          <mat-card-title> Card Board </mat-card-title>
         </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <pofri-player-input-panel></pofri-player-input-panel>
-          <pofri-add-card></pofri-add-card>
+        <mat-card-content>
+          <pofri-player-card-input-panel></pofri-player-card-input-panel>
         </mat-card-content>
       </mat-card>
       <mat-card *ngIf="card.title == 'Card 3'">
+        <mat-card-header>
+          <mat-card-title> User Actions </mat-card-title>
+        </mat-card-header>
         <mat-card-content>
-          <pofri-player-card-input-panel></pofri-player-card-input-panel>
+          <pofri-player-input-panel></pofri-player-input-panel>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

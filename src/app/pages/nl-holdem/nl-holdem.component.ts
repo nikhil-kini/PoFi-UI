@@ -1,5 +1,11 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Component, inject } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  inject,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs';
 import { Constants } from 'src/app/commons/constants/constants';
@@ -21,7 +27,8 @@ export class NlHoldemComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private gameStartData!: GameStartDetails;
   private gameUserInfo!: UserDetails;
-  isActive = false;
+  players$!: Array<Player | null | undefined>;
+  playersCount$!: number | undefined;
 
   constructor(
     private matDialog: MatDialog,
@@ -32,7 +39,6 @@ export class NlHoldemComponent {
   ngOnInit() {
     this.onOpenDialogPageStart();
     this.setUpData();
-    this.gameTableService.createTable(this.gameStartData, this.gameUserInfo);
   }
 
   setUpData() {
@@ -44,6 +50,11 @@ export class NlHoldemComponent {
     );
   }
 
+  toggle() {
+    this.gameTableService.createTable(this.gameStartData, this.gameUserInfo);
+    this.players$ = this.gameTableService.tablePlayers$;
+    this.playersCount$ = this.gameTableService.totalPlayers$;
+  }
   onOpenDialogPageStart() {
     var _dialog = this.matDialog.open(UserGameDetailDailogComponent, {
       width: '360px',
@@ -52,8 +63,7 @@ export class NlHoldemComponent {
         title: 'User Information',
       },
     });
-
-    _dialog.afterClosed().subscribe((data) => (this.isActive = true));
+    _dialog.afterClosed().subscribe(() => this.toggle());
   }
 
   /** Based on the screen size, switch from standard to one column per row */

@@ -12,7 +12,7 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { EMPTY, Observable, iif, merge } from 'rxjs';
+import { EMPTY, Observable, Subscriber, iif, merge } from 'rxjs';
 import { delay, filter, map, switchMap } from 'rxjs/operators';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Card, MetaCard } from 'src/app/model/cards.model';
@@ -60,6 +60,7 @@ export class AddCardComponent implements OnInit {
 
   private isCardSelectionPanelVisible$!: Observable<boolean>;
   private isCardSelectionPanelHidden$!: Observable<boolean>;
+  private isSelected$!: Observable<boolean>;
   private isOverlayDetached$!: Observable<void>;
 
   constructor(
@@ -103,8 +104,11 @@ export class AddCardComponent implements OnInit {
     );
   }
 
-  selectCard(card: MetaCard) {
-    this.cardHolder$ = card;
-    this.selctedCard.emit(card.card);
+  selectCard(metaCard: MetaCard) {
+    this.cardHolder$ = metaCard;
+    this.isSelected$ = new Observable((subscriber) => {
+      subscriber.next(false);
+    });
+    this.selctedCard.emit(metaCard.card);
   }
 }

@@ -8,39 +8,36 @@ import { GameTableService } from 'src/app/service/game-table.service';
   styleUrls: ['./poker-table.component.scss'],
 })
 export class PokerTableComponent {
-  tabelPlayers$!: Array<Player | null | undefined>;
-  totalPlayersCount$: number | undefined;
+  @Input() tabelPlayers!: Array<Player | null | undefined>;
+  @Input() totalPlayersCount!: number | undefined;
 
   constructor(private gameTS: GameTableService) {}
 
-  ngOnInit() {
-    this.tabelPlayers$ = this.gameTS.tablePlayers$;
-    this.totalPlayersCount$ = this.gameTS.tablePlayers$.length;
-  }
+  ngOnInit() {}
 
   checkPlayer9(): boolean {
-    return this.totalPlayersCount$ == 9;
+    return this.totalPlayersCount == 9;
   }
 
   checkPlayer8(): boolean {
-    return this.totalPlayersCount$ == 8;
+    return this.totalPlayersCount == 8;
   }
   checkPlayer7(): boolean {
-    return this.totalPlayersCount$ == 7;
+    return this.totalPlayersCount == 7;
   }
   checkPlayer6(): boolean {
-    return this.totalPlayersCount$ == 6;
+    return this.totalPlayersCount == 6;
   }
   checkPlayer5(): boolean {
-    return this.totalPlayersCount$ == 5;
+    return this.totalPlayersCount == 5;
   }
   checkPlayer4(): boolean {
-    return this.totalPlayersCount$ == 4;
+    return this.totalPlayersCount == 4;
   }
   checkPlayer3(): boolean {
-    return this.totalPlayersCount$ == 3;
+    return this.totalPlayersCount == 3;
   }
   checkPlayer2(): boolean {
-    return this.totalPlayersCount$ == 2;
+    return this.totalPlayersCount == 2;
   }
 }
