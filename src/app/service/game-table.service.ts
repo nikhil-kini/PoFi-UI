@@ -30,6 +30,7 @@ export class GameTableService {
   tableGameType$!: GameType;
   tablePot$!: number;
   tableRunningBet$!: number;
+  isFreshRound$!: boolean;
 
   totalPlayers$!: number;
   tableAnte$!: number;
@@ -77,7 +78,7 @@ export class GameTableService {
       this.userPlayer$
     );
 
-    //current player Impl
+    this.isFreshRound$ = false;
     this.currentPlayer$ = this.startPlayer$;
     this.currentPlayer$!.playerBet = this.smallBet$;
     this.currentPlayer$ = this.getNext(this.currentPlayer$!);
@@ -110,6 +111,8 @@ export class GameTableService {
         break;
       case PlayerStatus.BET:
         this.tableRunningBet$ = addAmount!;
+        this.currentPlayer$!.playerBet = this.tableRunningBet$;
+        this.isFreshRound$ = false;
         break;
       case PlayerStatus.CALL:
         let diff = this.tableRunningBet$ - this.currentPlayer$!.playerBet;
@@ -117,6 +120,7 @@ export class GameTableService {
         this.currentPlayer$!.playerBet = this.tableRunningBet$;
         break;
       case PlayerStatus.RAISE:
+        if (this.tablePlayState$ < 2) this.tablePlayState$ += 1;
         this.startPlayer$ = this.currentPlayer$;
         this.tableRunningBet$ += addAmount!;
         this.tablePot$ += this.tableRunningBet$;
@@ -143,6 +147,7 @@ export class GameTableService {
         this.tablePot$ += this.tableAnte$ * this.totalPlayers$;
         this.tableRunningBet$ = 0;
         this.gerenaratePlayerSeatingService.softResetPlayers();
+        this.isFreshRound$ = true;
       }
     } else {
       this.currentPlayer$ = this.getNext(this.currentPlayer$!);
