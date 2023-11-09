@@ -15,6 +15,14 @@ export class PlayerInputPanelComponent {
   handCombination!: any;
   constructor(private gameTS: GameTableService, private builder: FormBuilder) {}
 
+  getPot(): number {
+    return this.gameTS.tablePot$;
+  }
+
+  getCurrentBet(): number {
+    return this.gameTS.tableRunningBet$;
+  }
+
   checkFreshSelection(): boolean {
     return this.gameTS.isFreshRound$;
   }

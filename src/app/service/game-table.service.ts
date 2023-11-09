@@ -53,8 +53,8 @@ export class GameTableService {
   createTable(gameStartData: GameStartDetails, gameUserInfoData: UserDetails) {
     this.totalPlayers$ = gameStartData.tableSeats;
     this.tableAnte$ = gameStartData.anteAmount;
-    this.smallBet$ = gameStartData.smallBet;
-    this.bigBet$ = gameStartData.bigBet;
+    this.smallBet$ = Number(gameStartData.smallBet);
+    this.bigBet$ = Number(gameStartData.bigBet);
 
     this.userPositon$ = gameUserInfoData.userPosition;
 

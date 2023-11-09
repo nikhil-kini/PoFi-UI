@@ -1,4 +1,6 @@
 <h2>Tabel round: {{ getRound() }}</h2>
+<h3>Amount In Pot: {{ getPot() }}</h3>
+<h3>Current Bet: {{ getCurrentBet() }}</h3>
 <div *ngIf="checkUser(); then us"></div>
 <ng-template #us>
   <div class="panel">
