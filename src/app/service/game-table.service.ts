@@ -83,6 +83,7 @@ export class GameTableService {
     this.currentPlayer$!.playerBet = this.smallBet$;
     this.currentPlayer$ = this.getNext(this.currentPlayer$!);
     this.currentPlayer$!.playerBet = this.bigBet$;
+    this.startPlayer$ = this.currentPlayer$;
     this.currentPlayer$ = this.getNext(this.currentPlayer$!);
     this.tableRunningBet$ = this.bigBet$;
     this.tablePot$ =
