@@ -1,0 +1,22 @@
+.sign-in-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+.is-invalid {
+    border-left: solid 6px red;
+  }
+
+.material-icons {
+    display: inline-flex;
+    vertical-align: middle;
+  }
+
+.text-danger{
+    color: rgb(233, 62, 62);
+}
+
+.text-success{
+    color: rgb(67, 218, 67);
+}

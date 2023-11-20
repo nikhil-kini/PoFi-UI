@@ -36,6 +36,8 @@ import { PlayerInputPanelComponent } from './pages/nl-holdem/components/player-i
 import { PlayerCardInputPanelComponent } from './pages/nl-holdem/components/player-card-input-panel/player-card-input-panel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GameTableService } from './service/game-table.service';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { SignInComponent } from './pages/sign-in/sign-in.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { GameTableService } from './service/game-table.service';
     AddCardComponent,
     PlayerInputPanelComponent,
     PlayerCardInputPanelComponent,
+    SignUpComponent,
+    SignInComponent,
   ],
   imports: [
     BrowserModule,
