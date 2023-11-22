@@ -1,9 +1,17 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   passwordMatchValidator,
   patternValidator,
 } from 'src/app/commons/service/custom-validators';
+import { User } from 'src/app/model/user.model';
+import { CognitoService } from 'src/app/service/cognito.service';
 
 @Component({
   selector: 'pofri-sign-up',
@@ -14,8 +22,16 @@ export class SignUpComponent {
   hide = true;
   re_hide = true;
   signUpForm!: FormGroup;
+  verifyForm!: FormGroup;
+  loading = false;
+  isConfirm = false;
+  user?: User;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private cognitoService: CognitoService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.signUpForm = this.fb.group(
@@ -52,5 +68,41 @@ export class SignUpComponent {
         validator: passwordMatchValidator,
       }
     );
+    this.verifyForm = new FormGroup({
+      code: new FormControl('', [Validators.required]),
+    });
+  }
+
+  public signUp(): void {
+    this.user = {
+      name: this.signUpForm.value.name,
+      email: this.signUpForm.value.emailId,
+      password: this.signUpForm.value.password,
+    };
+    this.loading = true;
+    this.cognitoService
+      .signUp(this.user!)
+      .then(() => {
+        this.loading = false;
+        this.isConfirm = true;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
+    console.log(this.user);
+  }
+
+  public confirmSignUp(): void {
+    this.loading = true;
+    this.user!.code = this.verifyForm.value.code!;
+    console.log(this.user);
+    this.cognitoService
+      .confirmSignUp(this.user!)
+      .then(() => {
+        this.router.navigate(['/sign-in']);
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   }
 }

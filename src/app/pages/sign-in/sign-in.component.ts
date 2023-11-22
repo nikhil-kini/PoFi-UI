@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/model/user.model';
+import { CognitoService } from 'src/app/service/cognito.service';
 
 @Component({
   selector: 'pofri-sign-in',
@@ -7,4 +11,29 @@ import { Component } from '@angular/core';
 })
 export class SignInComponent {
   hide = true;
+  loading = false;
+  user!: User;
+
+  constructor(private cognitoService: CognitoService, private router: Router) {}
+
+  signInForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required]),
+  });
+
+  public signIn(): void {
+    this.loading = true;
+    this.user = {
+      email: this.signInForm.value.email!,
+      password: this.signInForm.value.password!,
+    };
+    this.cognitoService
+      .signIn(this.user)
+      .then(() => {
+        this.router.navigate(['/lobby']);
+      })
+      .catch(() => {
+        this.loading = false;
+      });
+  }
 }

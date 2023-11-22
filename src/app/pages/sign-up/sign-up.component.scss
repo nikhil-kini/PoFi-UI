@@ -1,9 +1,10 @@
-.sign-in-container{
+.container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 2rem;
 }
+
 .is-invalid {
     border-left: solid 6px red;
   }
