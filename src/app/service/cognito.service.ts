@@ -3,7 +3,14 @@ import { User } from '../model/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { Amplify } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
-import { confirmSignUp, signIn, signOut, signUp } from 'aws-amplify/auth';
+import {
+  AuthUser,
+  confirmSignUp,
+  getCurrentUser,
+  signIn,
+  signOut,
+  signUp,
+} from 'aws-amplify/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -56,9 +63,9 @@ export class CognitoService {
     return this.authenticationSubject.value;
   }
 
-  // public getUser(): Promise<any> {
-  //   return Auth.currentUserInfo();
-  // }
+  public getUser(): Promise<any> {
+    return getCurrentUser();
+  }
 
   // public updateUser(user: User): Promise<any> {
   //   return Auth.currentUserPoolUser().then((cognitoUser: any) => {

@@ -38,6 +38,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { GameTableService } from './service/game-table.service';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
+import { SuccessComponent } from './pages/success/success.component';
+import { CancelComponent } from './pages/cancel/cancel.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
     PlayerCardInputPanelComponent,
     SignUpComponent,
     SignInComponent,
+    SuccessComponent,
+    CancelComponent,
   ],
   imports: [
     BrowserModule,
