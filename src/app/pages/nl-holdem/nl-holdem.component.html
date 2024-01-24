@@ -1,6 +1,6 @@
 <div class="grid-container">
   <h1 class="mat-h1">No-Limit Holdem</h1>
-  <mat-grid-list cols="2" rowHeight="480px">
+  <mat-grid-list cols="6" rowHeight="480px">
     <mat-grid-tile
       *ngFor="let card of cards | async"
       [colspan]="card.cols"
@@ -17,14 +17,14 @@
           ></pofri-poker-table>
         </mat-card-content>
       </mat-card>
-      <mat-card *ngIf="card.title == 'Card 2'">
+      <!-- <mat-card *ngIf="card.title == 'Card 2'">
         <mat-card-header>
           <mat-card-title> Card Board </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <pofri-player-card-input-panel></pofri-player-card-input-panel>
         </mat-card-content>
-      </mat-card>
+      </mat-card> -->
       <mat-card *ngIf="card.title == 'Card 3'">
         <mat-card-header>
           <mat-card-title> User Actions </mat-card-title>

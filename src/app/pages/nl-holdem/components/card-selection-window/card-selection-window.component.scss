@@ -20,8 +20,8 @@
 }
 
 mat-tab-group{
-    width: 18.5rem;
-    height: 26.4rem;
+    width: clamp(18.5rem, 50vw, 50rem);
+    height: clamp(26.4rem, 30vh, 50rem);
     background-color:#666;
     border-radius: 2%; 
 }

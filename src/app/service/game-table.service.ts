@@ -112,8 +112,10 @@ export class GameTableService {
         break;
       case PlayerStatus.BET:
         this.tableRunningBet$ = addAmount!;
+        this.tablePot$ += addAmount!;
         this.currentPlayer$!.playerBet = this.tableRunningBet$;
         this.isFreshRound$ = false;
+        this.startPlayer$ = this.currentPlayer$;
         break;
       case PlayerStatus.CALL:
         let diff = this.tableRunningBet$ - this.currentPlayer$!.playerBet;
@@ -143,7 +145,10 @@ export class GameTableService {
       } else {
         this.tableRound$ += 1;
         this.tablePlayState$ = 0;
-        this.currentPlayer$ = this.tableSmallBlint$;
+        this.currentPlayer$ =
+          this.tableSmallBlint$?.playerStatus === PlayerStatus.FOLD
+            ? this.getNext(this.tableSmallBlint$)
+            : this.tableSmallBlint$;
         this.startPlayer$ = this.currentPlayer$;
         this.tablePot$ += this.tableAnte$ * this.totalPlayers$;
         this.tableRunningBet$ = 0;

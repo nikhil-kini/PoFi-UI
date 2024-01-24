@@ -30,30 +30,53 @@
 <div *ngIf="checkFreshSelection(); then freshRound; else notFreshRound"></div>
 <ng-template #freshRound>
   <div class="panel">
-    <button mat-raised-button color="accent" (click)="check()">Check</button>
     <mat-form-field appearance="fill" color="accent">
       <mat-label>Bet Amount</mat-label>
       <input matInput placeholder="Amount" #betAmount />
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
       <mat-hint>Amount you want Bet.</mat-hint>
     </mat-form-field>
-    <button mat-raised-button color="accent" (click)="bet(betAmount.value)">
-      Bet
-    </button>
+    <div class="button-inline">
+      <button mat-raised-button color="accent" (click)="check()">Check</button>
+      <button mat-raised-button color="accent" (click)="bet(betAmount.value)">
+        Bet
+      </button>
+    </div>
   </div>
 </ng-template>
 <ng-template #notFreshRound>
   <div class="panel">
-    <button mat-raised-button color="accent" (click)="call()">Call</button>
     <mat-form-field appearance="fill" color="accent">
       <mat-label>Raise Amount</mat-label>
       <input matInput placeholder="Amount" #raiseAmount />
       <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
       <mat-hint>Amount you want Raise.</mat-hint>
     </mat-form-field>
-    <button mat-raised-button color="accent" (click)="raise(raiseAmount.value)">
-      Raise
-    </button>
-    <button mat-raised-button color="warn" (click)="fold()">Fold</button>
+    <div class="button-inline">
+      <div
+        *ngIf="checkIfCurrentAmountIsPlayerAmount(); then check1; else call1"
+      ></div>
+      <ng-template #check1>
+        <button mat-raised-button color="accent" (click)="call()">Check</button>
+      </ng-template>
+      <ng-template #call1>
+        <button mat-raised-button color="accent" (click)="call()">Call</button>
+      </ng-template>
+      <button
+        mat-raised-button
+        color="accent"
+        (click)="raise(raiseAmount.value)"
+      >
+        Raise
+      </button>
+      <button
+        class="button-ele"
+        mat-raised-button
+        color="warn"
+        (click)="fold()"
+      >
+        Fold
+      </button>
+    </div>
   </div>
 </ng-template>

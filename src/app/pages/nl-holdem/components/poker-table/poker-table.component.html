@@ -1,5 +1,6 @@
-<ul
-  [class]="{'circle-container9': checkPlayer9(),
+<div class="container">
+  <ul
+    [class]="{'circle-container9': checkPlayer9(),
     'circle-container8': checkPlayer8(),
     'circle-container7': checkPlayer7(),
     'circle-container6': checkPlayer6(),
@@ -8,8 +9,20 @@
     'circle-container3': checkPlayer3(),
     'circle-container2': checkPlayer2(),
   }"
->
-  <li *ngFor="let player of tabelPlayers">
-    <pofri-player-box [player]="player"> </pofri-player-box>
-  </li>
-</ul>
+  >
+    <li *ngFor="let player of tabelPlayers">
+      <pofri-player-box [player]="player"> </pofri-player-box>
+    </li>
+  </ul>
+  <div class="card-center">
+    <pofri-add-card></pofri-add-card>
+    <pofri-add-card></pofri-add-card>
+    <pofri-add-card></pofri-add-card>
+    <pofri-add-card></pofri-add-card>
+    <pofri-add-card></pofri-add-card>
+  </div>
+  <div class="card-center2">
+    <pofri-add-card></pofri-add-card>
+    <pofri-add-card></pofri-add-card>
+  </div>
+</div>

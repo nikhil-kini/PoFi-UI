@@ -33,13 +33,13 @@ export class CommonService {
    * Creats the card deck, expects no argument.
    * @returns deck of MetaCards[] which contains all card in the deck
    */
-  createDeck(): Array<MetaCard> {
+  createDeck(): MetaCard[] {
     let deck: MetaCard[] = [];
 
-    deck.concat(this.createCardStackOfSuit(Suit.HEART));
-    deck.concat(this.createCardStackOfSuit(Suit.DIAMOND));
-    deck.concat(this.createCardStackOfSuit(Suit.CLUB));
-    deck.concat(this.createCardStackOfSuit(Suit.SPADE));
+    deck = deck.concat(this.createCardStackOfSuit(Suit.HEART));
+    deck = deck.concat(this.createCardStackOfSuit(Suit.DIAMOND));
+    deck = deck.concat(this.createCardStackOfSuit(Suit.CLUB));
+    deck = deck.concat(this.createCardStackOfSuit(Suit.SPADE));
 
     return deck;
   }

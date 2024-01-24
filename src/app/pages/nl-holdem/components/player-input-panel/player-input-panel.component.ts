@@ -46,6 +46,13 @@ export class PlayerInputPanelComponent {
     handCombination.subscribe((val) => (this.handCombination = val));
   }
 
+  checkIfCurrentAmountIsPlayerAmount(): boolean {
+    return this.gameTS.tableRunningBet$ ===
+      this.gameTS.currentPlayer$?.playerBet
+      ? true
+      : false;
+  }
+
   call() {
     this.gameTS.playerAction(PlayerStatus.CALL);
   }

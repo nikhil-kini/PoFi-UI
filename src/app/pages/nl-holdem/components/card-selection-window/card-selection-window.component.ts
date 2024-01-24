@@ -8,20 +8,22 @@ import { MetaCard, Suit } from 'src/app/model/cards.model';
   styleUrls: ['./card-selection-window.component.scss'],
 })
 export class CardSelectionWindowComponent {
-  heartCard: MetaCard[] | undefined;
-  spadeCard: MetaCard[] | undefined;
-  clubCard: MetaCard[] | undefined;
-  diamondCard: MetaCard[] | undefined;
+  // heartCard: MetaCard[] | undefined;
+  // spadeCard: MetaCard[] | undefined;
+  // clubCard: MetaCard[] | undefined;
+  // diamondCard: MetaCard[] | undefined;
+  deckCard: MetaCard[] | undefined;
 
   @Output() selectedCard = new EventEmitter<MetaCard>();
 
   constructor(private commonService: CommonService) {}
 
   ngOnInit() {
-    this.heartCard = this.commonService.createCardStackOfSuit(Suit.HEART);
-    this.spadeCard = this.commonService.createCardStackOfSuit(Suit.SPADE);
-    this.clubCard = this.commonService.createCardStackOfSuit(Suit.CLUB);
-    this.diamondCard = this.commonService.createCardStackOfSuit(Suit.DIAMOND);
+    // this.heartCard = this.commonService.createCardStackOfSuit(Suit.HEART);
+    // this.spadeCard = this.commonService.createCardStackOfSuit(Suit.SPADE);
+    // this.clubCard = this.commonService.createCardStackOfSuit(Suit.CLUB);
+    // this.diamondCard = this.commonService.createCardStackOfSuit(Suit.DIAMOND);
+    this.deckCard = this.commonService.createDeck();
   }
 
   selectCard(card: MetaCard) {

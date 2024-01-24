@@ -12,12 +12,17 @@
   
 .dashboard-card-content {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
-  height: 50%;
+  height: 100%;
+  width: 100%;
+  padding: 0 0 0 0;
 }
 
 mat-card{
   height: 98%;
   width: 98%;
 }
+
+
+
