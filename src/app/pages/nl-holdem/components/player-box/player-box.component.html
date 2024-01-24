@@ -1,18 +1,10 @@
-<mat-card>
-  <h4
-    [ngStyle]="
-      (checkCurrentPlayer() && {
-        color: 'red'
-      }) ||
-      null
-    "
-  >
+<div class="container" [ngClass]="{ 'active-player': checkCurrentPlayer() }">
+  <h4>
     {{ player?.playerNumber }}
   </h4>
   <hr />
   <div>
-    <p><b>PP: </b> {{ player?.playerPosition }}</p>
     <p><b>BA: </b>{{ player?.playerBet }}</p>
-    <p><b>PC: </b>{{ player?.playerStatus }}</p>
+    <p><b>PS: </b>{{ player?.playerStatus }}</p>
   </div>
-</mat-card>
+</div>

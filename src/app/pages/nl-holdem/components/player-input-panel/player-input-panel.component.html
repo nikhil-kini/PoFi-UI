@@ -1,6 +1,23 @@
-<h2>Tabel round: {{ getRound() }}</h2>
-<h3>Amount In Pot: {{ getPot() }}</h3>
-<h3>Current Bet: {{ getCurrentBet() }}</h3>
+<div class="container-round-info">
+  <div class="element-info">
+    <div class="header-info">Tabel round:</div>
+    <div class="content-info">
+      {{ getRound() }}
+    </div>
+  </div>
+  <div class="element-info">
+    <div class="header-info">Pot Amount:</div>
+    <div class="content-info">
+      {{ getPot() }}
+    </div>
+  </div>
+  <div class="element-info">
+    <div class="header-info">Current Bet:</div>
+    <div class="content-info">
+      {{ getCurrentBet() }}
+    </div>
+  </div>
+</div>
 <div *ngIf="checkUser(); then us"></div>
 <ng-template #us>
   <div class="panel">

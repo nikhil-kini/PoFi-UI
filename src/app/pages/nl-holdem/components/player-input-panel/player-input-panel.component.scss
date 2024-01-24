@@ -24,3 +24,31 @@
         }
     }
 }
+
+.container-round-info{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 1rem 0 1rem 0;
+
+    .element-info{
+        margin: 0px 2px 0 2px;
+        flex-basis: 100px;
+        flex-grow: 1;
+        border: thin inset #ffee10;
+        border-radius: 4rem;
+
+        .header-info{
+            padding: .25rem;
+            font-size: large;
+            font-weight: bold;
+            text-align: center;
+        }
+        .content-info{
+            padding: .25rem;
+            text-align: center;
+        }
+
+    }
+}
