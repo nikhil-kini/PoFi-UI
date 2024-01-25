@@ -33,7 +33,6 @@ import { AddCardComponent } from './pages/nl-holdem/components/add-card/add-card
 import { OverlayModule } from '@angular/cdk/overlay';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { PlayerInputPanelComponent } from './pages/nl-holdem/components/player-input-panel/player-input-panel.component';
-import { PlayerCardInputPanelComponent } from './pages/nl-holdem/components/player-card-input-panel/player-card-input-panel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { GameTableService } from './service/game-table.service';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
@@ -55,7 +54,6 @@ import { CancelComponent } from './pages/cancel/cancel.component';
     CardSelectionWindowComponent,
     AddCardComponent,
     PlayerInputPanelComponent,
-    PlayerCardInputPanelComponent,
     SignUpComponent,
     SignInComponent,
     SuccessComponent,

@@ -19,6 +19,7 @@
 
         button{
             margin: 2px;
+            min-height: 3rem;
             flex-basis: 100px;
             flex-grow: 1;
         }
@@ -35,6 +36,7 @@
     .element-info{
         margin: 0px 2px 0 2px;
         flex-basis: 100px;
+        min-height: 4rem;
         flex-grow: 1;
         border: thin inset #ffee10;
         border-radius: 4rem;

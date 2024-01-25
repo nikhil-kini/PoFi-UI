@@ -18,31 +18,31 @@
     </div>
   </div>
 </div>
+<div class="container-round-info">
+  <div class="element-info">
+    <div class="header-info">Hand Category</div>
+    <div class="content-info">
+      {{ handCateory }}
+    </div>
+  </div>
+  <div class="element-info">
+    <div class="header-info">Hand Combination</div>
+    <div class="content-info">
+      {{ handCombination }}
+    </div>
+  </div>
+</div>
 <div *ngIf="checkUser(); then us"></div>
 <ng-template #us>
-  <div class="panel">
-    <mat-card *ngIf="handCateory">
-      <mat-card-header>Hand Category</mat-card-header>
-      <mat-card-content
-        ><p>{{ handCateory | json }}</p>
-      </mat-card-content>
-    </mat-card>
-    <mat-card *ngIf="decision">
-      <mat-card-header>Decision</mat-card-header>
-      <mat-card-content
-        ><p>{{ decision | json }}</p>
-      </mat-card-content>
-    </mat-card>
-    <mat-card *ngIf="handCombination">
-      <mat-card-header>Hand Combination</mat-card-header>
-      <mat-card-content
-        ><p>{{ handCombination | json }}</p>
-      </mat-card-content>
-    </mat-card>
-    <button mat-raised-button color="accent" (click)="getResult()">
-      Result
-    </button>
+  <div class="container-round-info">
+    <div class="element-info">
+      <div class="header-info">Decision</div>
+      <div class="content-info">
+        {{ decision }}
+      </div>
+    </div>
   </div>
+  <button mat-raised-button color="accent" (click)="getResult()">Result</button>
 </ng-template>
 <div *ngIf="checkFreshSelection(); then freshRound; else notFreshRound"></div>
 <ng-template #freshRound>

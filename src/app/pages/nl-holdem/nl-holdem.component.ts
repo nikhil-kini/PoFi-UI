@@ -73,17 +73,13 @@ export class NlHoldemComponent {
         //mobile
         return [
           { title: 'Game Engine', cols: 6, rows: 1 },
-          // { title: 'Card 2', cols: 2, rows: 1 },
-          { title: 'Card 3', cols: 6, rows: 2 },
-          // { title: 'Card 4', cols: 1, rows: 1 }
+          { title: 'Card 3', cols: 6, rows: 1.1 },
         ];
       }
       //desktop
       return [
-        { title: 'Game Engine', cols: 4, rows: 2 },
-        // { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 2, rows: 2 },
-        // { title: 'Card 4', cols: 1, rows: 1 }
+        { title: 'Game Engine', cols: 4, rows: 1.5 },
+        { title: 'Card 3', cols: 2, rows: 1.5 },
       ];
     })
   );

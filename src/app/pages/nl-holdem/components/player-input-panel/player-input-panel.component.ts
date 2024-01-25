@@ -10,9 +10,9 @@ import { GameTableService } from 'src/app/service/game-table.service';
   styleUrls: ['./player-input-panel.component.scss'],
 })
 export class PlayerInputPanelComponent {
-  handCateory!: any;
+  handCateory = 'NA';
   decision!: any;
-  handCombination!: any;
+  handCombination = 'NA';
   constructor(private gameTS: GameTableService, private builder: FormBuilder) {}
 
   getPot(): number {
@@ -41,9 +41,15 @@ export class PlayerInputPanelComponent {
     let handCategory = this.gameTS.getHandCategory();
     let decision = this.gameTS.getDecision();
     let handCombination = this.gameTS.getHandCombination();
-    handCategory.subscribe((val) => (this.handCateory = val));
-    decision.subscribe((val) => (this.decision = val));
-    handCombination.subscribe((val) => (this.handCombination = val));
+    handCategory.subscribe(
+      (val) => (this.handCateory = val.handCategoryResult)
+    );
+    decision.subscribe(
+      (val) => (this.decision = val.decisionResults.join(' / '))
+    );
+    handCombination.subscribe(
+      (val) => (this.handCombination = val.completeHandCombinations[0])
+    );
   }
 
   checkIfCurrentAmountIsPlayerAmount(): boolean {

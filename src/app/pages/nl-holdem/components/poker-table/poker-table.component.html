@@ -15,14 +15,15 @@
     </li>
   </ul>
   <div class="card-center">
-    <pofri-add-card></pofri-add-card>
-    <pofri-add-card></pofri-add-card>
-    <pofri-add-card></pofri-add-card>
-    <pofri-add-card></pofri-add-card>
-    <pofri-add-card></pofri-add-card>
+    <pofri-add-card
+      (selctedCard)="boardCardSelection(idBoard, $event)"
+      *ngFor="let idBoard of [1, 2, 3, 4, 5]"
+    ></pofri-add-card>
   </div>
   <div class="card-center2">
-    <pofri-add-card></pofri-add-card>
-    <pofri-add-card></pofri-add-card>
+    <pofri-add-card
+      (selctedCard)="userCardSelection(idUser, $event)"
+      *ngFor="let idUser of [1, 2]"
+    ></pofri-add-card>
   </div>
 </div>
