@@ -12,10 +12,8 @@ import { MatListModule } from '@angular/material/list';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
-import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { LobbyComponent } from './pages/lobby/lobby.component';
 import { NlHoldemComponent } from './pages/nl-holdem/nl-holdem.component';
-import { DashboardComponent } from './pages/lobby/components/dashboard/dashboard.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -43,10 +41,8 @@ import { CancelComponent } from './pages/cancel/cancel.component';
 @NgModule({
   declarations: [
     AppComponent,
-    SidenavComponent,
     LobbyComponent,
     NlHoldemComponent,
-    DashboardComponent,
     GameInfoDialogComponent,
     UserGameDetailDailogComponent,
     PlayerBoxComponent,
