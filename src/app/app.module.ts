@@ -79,7 +79,7 @@ import { CancelComponent } from './pages/cancel/cancel.component';
     ScrollingModule,
     HttpClientModule,
   ],
-  providers: [GameStartInfoService, GameTableService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

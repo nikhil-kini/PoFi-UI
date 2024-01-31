@@ -7,11 +7,7 @@ import { Position } from '../commons/constants/constants';
 import { GameType, PlayState, Round } from '../model/table.model';
 import { Observable } from 'rxjs';
 import { HttpClientService } from './http-client.service';
-import {
-  GameStartDetails,
-  GameStartInfoService,
-  UserDetails,
-} from './game-start-info.service';
+import { GameStartDetails, UserDetails } from './game-start-info.service';
 
 @Injectable({
   providedIn: 'root',
@@ -41,8 +37,7 @@ export class GameTableService {
   constructor(
     private commonService: CommonService,
     private gerenaratePlayerSeatingService: GerenaratePlayerSeatingService,
-    private httpClient: HttpClientService,
-    private gameStartInfoService: GameStartInfoService
+    private httpClient: HttpClientService
   ) {}
 
   /**
@@ -66,7 +61,6 @@ export class GameTableService {
         playerPosition[index - 1]
       );
       console.log('player added');
-      console.log(this.gerenaratePlayerSeatingService);
     }
 
     this.startPlayer$ = this.gerenaratePlayerSeatingService.head;
@@ -92,7 +86,7 @@ export class GameTableService {
     this.tableDeck$ = this.commonService.createDeck();
     this.tableRound$ = 0;
     this.tablePlayState$ = 0;
-    if (this.gerenaratePlayerSeatingService.size() <= 5) {
+    if (this.totalPlayers$ <= 5) {
       this.tableGameType$ = GameType.TIGHT;
     } else {
       this.tableGameType$ = GameType.LOOSE;
@@ -103,7 +97,7 @@ export class GameTableService {
    *
    * @param playerStatus palyer status to be updated for current player.
    */
-  playerAction(playerStatus: PlayerStatus, addAmount?: number) {
+  playerAction(playerStatus: PlayerStatus, addAmount: number = 0) {
     this.currentPlayer$!.playerStatus = playerStatus;
     switch (playerStatus) {
       case PlayerStatus.NA:
@@ -112,7 +106,7 @@ export class GameTableService {
         break;
       case PlayerStatus.BET:
         this.tableRunningBet$ = addAmount!;
-        this.tablePot$ += addAmount!;
+        this.tablePot$ += addAmount;
         this.currentPlayer$!.playerBet = this.tableRunningBet$;
         this.isFreshRound$ = false;
         this.startPlayer$ = this.currentPlayer$;
@@ -125,7 +119,7 @@ export class GameTableService {
       case PlayerStatus.RAISE:
         if (this.tablePlayState$ < 2) this.tablePlayState$ += 1;
         this.startPlayer$ = this.currentPlayer$;
-        this.tableRunningBet$ += addAmount!;
+        this.tableRunningBet$ += addAmount;
         this.tablePot$ += this.tableRunningBet$;
         this.currentPlayer$!.playerBet = this.tableRunningBet$;
         break;

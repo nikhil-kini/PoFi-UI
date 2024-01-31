@@ -18,8 +18,6 @@ export interface GameStartDetails {
   providedIn: 'root',
 })
 export class GameStartInfoService {
-  constructor() {}
-
   private gameStartDataSource = new BehaviorSubject<GameStartDetails>({
     profileName: 'Not set',
     websiteName: 'Not Set',
