@@ -10,7 +10,7 @@ import { Player, PlayerPosition, PlayerStatus } from '../model/player.model';
 import { Position } from '../commons/constants/constants';
 import { GerenaratePlayerSeatingService } from './gerenarate-player-seating.service';
 
-fdescribe('GameTableService', () => {
+describe('GameTableService', () => {
   let service: GameTableService;
   let commonServiceSpy: jasmine.SpyObj<CommonService>;
   let gerenaratePlayerSeatingServiceSpy: jasmine.SpyObj<GerenaratePlayerSeatingService>;
@@ -189,7 +189,7 @@ fdescribe('GameTableService', () => {
       .toEqual(currentPlayer.nextPlayer);
   });
 
-  xit('changeCurrentPlayerToNextAndUpdateRound() method test last player === current Player, last round', () => {
+  it('changeCurrentPlayerToNextAndUpdateRound() method test last player === current Player, last round', () => {
     let currentPlayer = new Player(1, PlayerPosition.SMALL_BLIND);
     currentPlayer.nextPlayer = new Player(2, PlayerPosition.BIG_BLIND);
     currentPlayer.nextPlayer.nextPlayer = new Player(3, PlayerPosition.EARLY);
@@ -802,9 +802,9 @@ fdescribe('GameTableService', () => {
     expect(gerenaratePlayerSeatingServiceSpy.addPlayer.calls.count())
       .withContext('generatePlayerService addPlayer Call count')
       .toEqual(7);
-    // expect(gerenaratePlayerSeatingServiceSpy.head)
-    // .withContext('generatePlayerService findPlayer Call count')
-    // .toEqual(1);
+    expect(gerenaratePlayerSeatingServiceSpy.head)
+      .withContext('generatePlayerService findPlayer Call count')
+      .toBe(demPlayer);
     expect(gerenaratePlayerSeatingServiceSpy.findPlayer.calls.count())
       .withContext('generatePlayerService findPlayer Call count')
       .toEqual(1);

@@ -41,12 +41,10 @@ export class GerenaratePlayerSeatingService {
     let currentPlayer: Player | null = this.head;
     let nextPlayer: Player | null = null;
 
-    if (this.head === null) {
-      throw new Error('The Table is Empty');
-    }
-
     do {
-      if (!currentPlayer) break;
+      if (!currentPlayer) {
+        throw new Error('The Table is Empty');
+      }
 
       nextPlayer = currentPlayer.nextPlayer;
       if (nextPlayer && nextPlayer.playerNumber === playerNumber) {
@@ -82,25 +80,21 @@ export class GerenaratePlayerSeatingService {
   findPlayer(playerNumber: number): Player {
     let currentPlayer: Player | null = this.head;
 
-    if (this.head === null) {
-      throw new Error('The Table is Empty');
-    } else {
-      do {
-        if (!currentPlayer) break;
+    do {
+      if (!currentPlayer) throw new Error('The Table is Empty');
 
-        if (currentPlayer.playerNumber === playerNumber) {
-          return currentPlayer;
-        }
+      if (currentPlayer.playerNumber === playerNumber) {
+        break;
+      }
 
-        if (currentPlayer === this.tail) {
-          throw new Error('The Player is not found in the table');
-        }
+      if (currentPlayer === this.tail) {
+        throw new Error('The Player is not found in the table');
+      }
 
-        currentPlayer = currentPlayer.nextPlayer;
-      } while (currentPlayer !== this.head);
-    }
+      currentPlayer = currentPlayer.nextPlayer;
+    } while (currentPlayer !== this.head);
 
-    throw new Error('The Player is not found in the table');
+    return currentPlayer!;
   }
 
   /**
