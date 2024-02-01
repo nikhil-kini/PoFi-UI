@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { GerenaratePlayerSeatingService } from './gerenarate-player-seating.service';
 import { Player, PlayerPosition, PlayerStatus } from '../model/player.model';
 
-fdescribe('GerenaratePlayerSeatingService', () => {
+describe('GerenaratePlayerSeatingService', () => {
   let service: GerenaratePlayerSeatingService;
 
   beforeEach(() => {

@@ -1,5 +1,3 @@
-import { TestBed } from '@angular/core/testing';
-
 import { GameStartInfoService } from './game-start-info.service';
 import { take } from 'rxjs/internal/operators/take';
 

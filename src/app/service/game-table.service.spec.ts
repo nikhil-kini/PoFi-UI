@@ -1,13 +1,10 @@
-import { TestBed } from '@angular/core/testing';
-
 import { GameTableService } from './game-table.service';
 import { CommonService } from '../commons/service/common.service';
 import { HttpClientService } from './http-client.service';
-import { Observable, generate } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Rank, Suit } from '../model/cards.model';
 import { GameType, PlayState, Round } from '../model/table.model';
 import { Player, PlayerPosition, PlayerStatus } from '../model/player.model';
-import { Position } from '../commons/constants/constants';
 import { GerenaratePlayerSeatingService } from './gerenarate-player-seating.service';
 
 describe('GameTableService', () => {
