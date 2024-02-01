@@ -1,24 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { User } from '../model/user.model';
 import { BehaviorSubject } from 'rxjs';
 import { Amplify } from 'aws-amplify';
 import { environment } from 'src/environments/environment';
-import {
-  AuthUser,
-  confirmSignUp,
-  getCurrentUser,
-  signIn,
-  signOut,
-  signUp,
-} from 'aws-amplify/auth';
+import * as authAWS from 'aws-amplify/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CognitoService {
   private authenticationSubject: BehaviorSubject<any>;
-
-  constructor() {
+  constructor(@Inject(AWS_AMPLIFY_AUTH) private auth: typeof authAWS) {
     Amplify.configure({
       Auth: { Cognito: environment.cognito },
     });
@@ -27,7 +19,7 @@ export class CognitoService {
   }
 
   public signUp(user: User): Promise<any> {
-    return signUp({
+    return this.auth.signUp({
       username: user.email,
       password: user.password,
       options: {
@@ -39,24 +31,24 @@ export class CognitoService {
   }
 
   public confirmSignUp(user: User): Promise<any> {
-    return confirmSignUp({
+    return this.auth.confirmSignUp({
       username: user.email,
       confirmationCode: user.code!,
     });
   }
 
   public signIn(user: User): Promise<any> {
-    return signIn({ username: user.email, password: user.password }).then(
-      () => {
-        this.authenticationSubject.next(true);
-      }
-    );
+    return this.auth.signIn({ username: user.email, password: user.password });
+    // .then(() => {
+    //   this.authenticationSubject.next(true);
+    // });
   }
 
   public signOut(): Promise<any> {
-    return signOut().then(() => {
-      this.authenticationSubject.next(false);
-    });
+    return this.auth.signOut();
+    // .then(() => {
+    //   this.authenticationSubject.next(false);
+    // });
   }
 
   public isAuthenticated(): boolean {
@@ -64,7 +56,7 @@ export class CognitoService {
   }
 
   public getUser(): Promise<any> {
-    return getCurrentUser();
+    return this.auth.getCurrentUser();
   }
 
   // public updateUser(user: User): Promise<any> {
@@ -73,3 +65,8 @@ export class CognitoService {
   //   });
   // }
 }
+
+export const AWS_AMPLIFY_AUTH = new InjectionToken('AWS_AMPLIFY_AUTH', {
+  factory: () => authAWS,
+  providedIn: 'root',
+});
