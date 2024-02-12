@@ -5,8 +5,6 @@ import { MetaCard, Rank, Suit } from 'src/app/model/cards.model';
   providedIn: 'root',
 })
 export class CommonService {
-  constructor() {}
-
   createCardStackOfSuit(suit: Suit): MetaCard[] {
     let rank = Object.values(Rank).filter((x) => !isNaN(Number(x)));
     let deck: MetaCard[] = [];

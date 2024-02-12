@@ -3,7 +3,7 @@ import { TestBed } from '@angular/core/testing';
 import { AWS_AMPLIFY_AUTH, CognitoService } from './cognito.service';
 import { User } from '../model/user.model';
 
-fdescribe('CognitoService', () => {
+describe('CognitoService', () => {
   let service: CognitoService;
 
   beforeEach(() => {
