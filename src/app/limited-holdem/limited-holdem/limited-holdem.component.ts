@@ -1,29 +1,23 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import {
-  AfterContentInit,
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  inject,
-} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs';
 import { Constants } from 'src/app/commons/constants/constants';
 import { Player } from 'src/app/model/player.model';
+import { UserGameDetailDailogComponent } from 'src/app/limited-holdem/user-game-detail-dailog/user-game-detail-dailog.component';
 import {
   GameStartDetails,
-  GameStartInfoService,
   UserDetails,
+  GameStartInfoService,
 } from 'src/app/service/game-start-info.service';
-import { UserGameDetailDailogComponent } from './components/user-game-detail-dailog/user-game-detail-dailog.component';
 import { GameTableService } from 'src/app/service/game-table.service';
 
 @Component({
-  selector: 'pofri-nl-holdem',
-  templateUrl: './nl-holdem.component.html',
-  styleUrls: ['./nl-holdem.component.scss'],
+  selector: 'pofri-limited-holdem',
+  templateUrl: './limited-holdem.component.html',
+  styleUrls: ['./limited-holdem.component.scss'],
 })
-export class NlHoldemComponent {
+export class LimitedHoldemComponent {
   private breakpointObserver = inject(BreakpointObserver);
   private gameStartData!: GameStartDetails;
   private gameUserInfo!: UserDetails;

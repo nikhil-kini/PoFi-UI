@@ -58,6 +58,6 @@ export class GameInfoDialogComponent {
     // console.log(this.startData.bigBet);
     this.gameStartInfoService.setGameStartData(this.gameInfoForm.value);
     this.closepopup();
-    this.router.navigate(['/', 'nlholdem']);
+    this.router.navigate(['/', 'l-holdem']);
   }
 }

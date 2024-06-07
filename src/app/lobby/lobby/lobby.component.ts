@@ -9,7 +9,7 @@ import { CognitoService } from 'src/app/service/cognito.service';
 import { HttpClientService } from 'src/app/service/http-client.service';
 import { environment } from 'src/environments/environment';
 import Stripe from 'stripe';
-import { GameInfoDialogComponent } from './components/game-info-dialog/game-info-dialog.component';
+import { GameInfoDialogComponent } from '../game-info-dialog/game-info-dialog.component';
 
 @Component({
   selector: 'pofri-lobby',

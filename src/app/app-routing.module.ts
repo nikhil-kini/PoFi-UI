@@ -1,24 +1,32 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LobbyComponent } from './pages/lobby/lobby.component';
-import { NlHoldemComponent } from './pages/nl-holdem/nl-holdem.component';
-import { PokerTableComponent } from './pages/nl-holdem/components/poker-table/poker-table.component';
-import { SignInComponent } from './pages/sign-in/sign-in.component';
-import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import { LobbyComponent } from './lobby/lobby/lobby.component';
 import { SuccessComponent } from './pages/success/success.component';
 import { CancelComponent } from './pages/cancel/cancel.component';
 import { authGuard } from './service/auth.guard';
-import { AuthenticationComponent } from './pages/authentication/authentication.component';
+import { LimitedHoldemComponent } from './limited-holdem/limited-holdem/limited-holdem.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AuthenticationRoutingModule } from './authentication/authentication-route.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: LobbyComponent,
-    canActivate: [authGuard],
+    component: HomeComponent,
   },
   {
     path: 'success',
     component: SuccessComponent,
+  },
+  {
+    path: 'auth',
+    loadChildren: () =>
+      import('./authentication/authentication.module').then(
+        (m) => m.AuthenticationModule
+      ),
+  },
+  {
+    path: 'home',
+    component: HomeComponent,
   },
   {
     path: 'cancel',
@@ -26,29 +34,21 @@ const routes: Routes = [
   },
   {
     path: 'lobby',
-    component: LobbyComponent,
+    loadChildren: () =>
+      import('./lobby/lobby.module').then((m) => m.LobbyModule),
     canActivate: [authGuard],
   },
   {
-    path: 'nlholdem',
-    component: NlHoldemComponent,
+    path: 'l-holdem',
+    loadChildren: () =>
+      import('./limited-holdem/limited-holdem.module').then(
+        (m) => m.LimitedHoldemModule
+      ),
     canActivate: [authGuard],
-  },
-  {
-    path: 'auth',
-    component: AuthenticationComponent,
-  },
-  {
-    path: 'sign-in',
-    component: SignInComponent,
-  },
-  {
-    path: 'sign-up',
-    component: SignUpComponent,
   },
   {
     path: '**',
-    redirectTo: 'sign-in',
+    redirectTo: 'home',
   },
 ];
 
