@@ -7,11 +7,14 @@ import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SuccessComponent } from './pages/success/success.component';
 import { CancelComponent } from './pages/cancel/cancel.component';
+import { authGuard } from './service/auth.guard';
+import { AuthenticationComponent } from './pages/authentication/authentication.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LobbyComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'success',
@@ -24,14 +27,16 @@ const routes: Routes = [
   {
     path: 'lobby',
     component: LobbyComponent,
+    canActivate: [authGuard],
   },
   {
     path: 'nlholdem',
     component: NlHoldemComponent,
+    canActivate: [authGuard],
   },
   {
-    path: 'poker-table',
-    component: PokerTableComponent,
+    path: 'auth',
+    component: AuthenticationComponent,
   },
   {
     path: 'sign-in',

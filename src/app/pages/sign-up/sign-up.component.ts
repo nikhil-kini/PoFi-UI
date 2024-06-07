@@ -64,7 +64,7 @@ export class SignUpComponent {
         confirmPassword: ['', [Validators.required]],
       },
       {
-        // check whether our password and confirm password match
+        // check whether our  password and confirm password match
         validator: passwordMatchValidator,
       }
     );

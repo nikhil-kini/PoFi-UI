@@ -8,7 +8,7 @@ import { GameTableService } from 'src/app/service/game-table.service';
   styleUrls: ['./player-box.component.scss'],
 })
 export class PlayerBoxComponent {
-  @Input() player: Player | null | undefined;
+  @Input() player?: Player | null;
 
   constructor(private gameTS: GameTableService) {}
 

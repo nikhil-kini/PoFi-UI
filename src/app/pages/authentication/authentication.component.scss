@@ -1,0 +1,74 @@
+.page-center{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 100px;
+}
+.card-auth{
+    width: clamp(400px, 40%, 500px);
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.tab-grp{
+    width: 80%;
+    height: 80% !important;
+}
+
+
+.sign-in-container{
+    display: flex;
+    height: max-content;
+    flex-direction: column;
+    justify-content: start;
+
+    mat-form-field{
+        padding: 10px 0 10px 0;
+    }
+
+    .sign-button{
+        margin: 10px 0 20px 0;
+    }
+}
+
+.sign-up-container{
+    display: flex;
+    height: max-content;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    mat-form-field{
+        padding: 10px 0 10px 0;
+    }
+
+    label{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        font-size: 14px;
+        padding: 5px 0 5px 0;
+
+        .pval-icon{
+            padding-right: 8px ;
+        }
+    }
+    .sign-button{
+        margin: 10px 0 20px 0;
+    }
+
+    .text-danger{
+        color: rgb(233, 62, 62);
+    }
+    
+    .text-success{
+        color: rgb(67, 218, 67);
+    }
+    
+}
+

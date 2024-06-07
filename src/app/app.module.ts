@@ -37,6 +37,9 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { SignInComponent } from './pages/sign-in/sign-in.component';
 import { SuccessComponent } from './pages/success/success.component';
 import { CancelComponent } from './pages/cancel/cancel.component';
+import { AuthenticationComponent } from './pages/authentication/authentication.component';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { CancelComponent } from './pages/cancel/cancel.component';
     SignInComponent,
     SuccessComponent,
     CancelComponent,
+    AuthenticationComponent,
+    HomeComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

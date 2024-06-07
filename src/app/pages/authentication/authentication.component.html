@@ -1,0 +1,259 @@
+<div class="page-center">
+  <mat-card class="card-auth">
+    <mat-card-header>
+      <mat-card-title> Authentication </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="tab-grp">
+      <mat-tab-group>
+        <mat-tab label="Log in">
+          <form [formGroup]="signInForm">
+            <div class="sign-in-container">
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Email Id</mat-label>
+                <input
+                  matInput
+                  formControlName="email"
+                  placeholder="Email ID"
+                />
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-hint>Registered Poker-Friend Email ID.</mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Password</mat-label>
+                <input
+                  matInput
+                  formControlName="password"
+                  placeholder="Password"
+                  [type]="hide ? 'password' : 'text'"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                <mat-hint>Enter password.</mat-hint>
+              </mat-form-field>
+              <button
+                class="sign-button"
+                mat-raised-button
+                [disabled]="!signInForm.valid && !loading"
+                color="accent"
+                (click)="signIn()"
+              >
+                Log In
+              </button>
+            </div>
+          </form>
+        </mat-tab>
+        <mat-tab label="Register">
+          <form [formGroup]="signUpForm">
+            <div class="sign-up-container">
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" placeholder="Name" />
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-hint>Prefered Name to register with us.</mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Email Id</mat-label>
+                <input
+                  matInput
+                  formControlName="emailId"
+                  placeholder="pat@example.com"
+                />
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                <mat-hint>Prefered Email Id to register with us.</mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Enter your password</mat-label>
+                <input
+                  matInput
+                  [type]="hide ? 'password' : 'text'"
+                  formControlName="password"
+                  placeholder="Password"
+                />
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="hide = !hide"
+                  [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide"
+                >
+                  <mat-icon>{{
+                    hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                <mat-hint>Refer below to write a strong password.</mat-hint>
+              </mat-form-field>
+              <div class="password-validation-contianer">
+                <label
+                  class="col"
+                  [ngClass]="
+                    signUpForm.controls['password'].hasError('required') ||
+                    signUpForm.controls['password'].hasError('minlength')
+                      ? 'text-danger'
+                      : 'text-success'
+                  "
+                >
+                  <mat-icon [inline]="true" class="pval-icon">{{
+                    signUpForm.controls["password"].hasError("required") ||
+                    signUpForm.controls["password"].hasError("minlength")
+                      ? "cancel"
+                      : "check_circle"
+                  }}</mat-icon>
+                  Must be at least 8 characters!
+                </label>
+                <label
+                  class="col"
+                  [ngClass]="
+                    signUpForm.controls['password'].hasError('required') ||
+                    signUpForm.controls['password'].hasError('hasNumber')
+                      ? 'text-danger'
+                      : 'text-success'
+                  "
+                >
+                  <mat-icon [inline]="true" class="pval-icon">{{
+                    signUpForm.controls["password"].hasError("required") ||
+                    signUpForm.controls["password"].hasError("hasNumber")
+                      ? "cancel"
+                      : "check_circle"
+                  }}</mat-icon>
+                  Must contain at least 1 number!
+                </label>
+                <label
+                  class="col"
+                  [ngClass]="
+                    signUpForm.controls['password'].hasError('required') ||
+                    signUpForm.controls['password'].hasError('hasCapitalCase')
+                      ? 'text-danger'
+                      : 'text-success'
+                  "
+                >
+                  <mat-icon [inline]="true" class="pval-icon">{{
+                    signUpForm.controls["password"].hasError("required") ||
+                    signUpForm.controls["password"].hasError("hasCapitalCase")
+                      ? "cancel"
+                      : "check_circle"
+                  }}</mat-icon>
+                  Must contain at least 1 in Capital Case!
+                </label>
+                <label
+                  class="col"
+                  [ngClass]="
+                    signUpForm.controls['password'].hasError('required') ||
+                    signUpForm.controls['password'].hasError('hasSmallCase')
+                      ? 'text-danger'
+                      : 'text-success'
+                  "
+                >
+                  <mat-icon [inline]="true" class="pval-icon">{{
+                    signUpForm.controls["password"].hasError("required") ||
+                    signUpForm.controls["password"].hasError("hasSmallCase")
+                      ? "cancel"
+                      : "check_circle"
+                  }}</mat-icon>
+                  Must contain at least 1 Letter in Small Case!
+                </label>
+                <label
+                  class="col"
+                  [ngClass]="
+                    signUpForm.controls['password'].hasError('required') ||
+                    signUpForm.controls['password'].hasError(
+                      'hasSpecialCharacters'
+                    )
+                      ? 'text-danger'
+                      : 'text-success'
+                  "
+                >
+                  <mat-icon [inline]="true" class="pval-icon">{{
+                    signUpForm.controls["password"].hasError("required") ||
+                    signUpForm.controls["password"].hasError(
+                      "hasSpecialCharacters"
+                    )
+                      ? "cancel"
+                      : "check_circle"
+                  }}</mat-icon>
+                  Must contain at least 1 Special Character!
+                </label>
+              </div>
+              <mat-form-field appearance="fill" color="accent">
+                <mat-label>Re-enter your password</mat-label>
+                <input
+                  matInput
+                  [type]="re_hide ? 'password' : 'text'"
+                  formControlName="confirmPassword"
+                  placeholder="Confirm Password"
+                />
+
+                <button
+                  mat-icon-button
+                  matSuffix
+                  (click)="re_hide = !re_hide"
+                  [attr.aria-label]="'Hide re-enter password'"
+                  [attr.aria-pressed]="re_hide"
+                >
+                  <mat-icon>{{
+                    re_hide ? "visibility_off" : "visibility"
+                  }}</mat-icon>
+                </button>
+                <mat-hint>Re-enter the password.</mat-hint>
+              </mat-form-field>
+              <label
+                class="text-danger"
+                *ngIf="
+                  signUpForm.controls['confirmPassword'].hasError(
+                    'NoPassswordMatch'
+                  )
+                "
+              >
+                Password do not match.
+              </label>
+              <button
+                class="sign-button"
+                mat-raised-button
+                [disabled]="!signUpForm.valid && loading"
+                color="accent"
+                (click)="signUp()"
+              >
+                Sign up / Register
+              </button>
+            </div>
+          </form>
+
+          <ng-container *ngIf="isConfirm">
+            <hr />
+            <form [formGroup]="verifyForm">
+              <div class="sign-up-container">
+                <mat-form-field appearance="fill" color="accent">
+                  <mat-label>Enter code</mat-label>
+                  <input matInput formControlName="code" placeholder="Name" />
+                  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                  <mat-hint
+                    >The verification code is sent your registered
+                    email.</mat-hint
+                  >
+                </mat-form-field>
+                <button
+                  class="sign-button"
+                  mat-raised-button
+                  [disabled]="!verifyForm.valid && !loading"
+                  color="accent"
+                  (click)="confirmSignUp()"
+                >
+                  Verify
+                </button>
+              </div>
+            </form>
+          </ng-container>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
+</div>

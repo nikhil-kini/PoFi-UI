@@ -19,7 +19,9 @@ export function patternValidator(
   };
 }
 
-export function passwordMatchValidator(control: AbstractControl) {
+export function passwordMatchValidator(
+  control: AbstractControl
+): AbstractControl<any, any> | null {
   const password = control.get('password')!.value;
   const confirmPassword = control.get('confirmPassword')!.value;
   const currentErrors = control.get('confirmPassword')!.errors;
@@ -30,6 +32,8 @@ export function passwordMatchValidator(control: AbstractControl) {
   } else {
     confirmControl!.setErrors(currentErrors);
   }
+
+  return confirmControl;
 }
 
 function compare(password: string, confirmPassword: string) {
