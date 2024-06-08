@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LobbyComponent } from './lobby/lobby/lobby.component';
 import { SuccessComponent } from './pages/success/success.component';
 import { CancelComponent } from './pages/cancel/cancel.component';
 import { authGuard } from './service/auth.guard';
-import { LimitedHoldemComponent } from './limited-holdem/limited-holdem/limited-holdem.component';
 import { HomeComponent } from './pages/home/home.component';
-import { AuthenticationRoutingModule } from './authentication/authentication-route.module';
 
 const routes: Routes = [
   {
