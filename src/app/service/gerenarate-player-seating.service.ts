@@ -135,4 +135,10 @@ export class GerenaratePlayerSeatingService {
       current = current!.nextPlayer;
     } while (current != this.head);
   }
+
+  newTable(): void {
+    this.head = null;
+    this.tail = null;
+    this.playerCount = 0;
+  }
 }

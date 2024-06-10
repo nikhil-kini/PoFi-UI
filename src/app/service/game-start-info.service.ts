@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
-export interface UserDetails {
-  userPosition: number;
-}
+import { Player, PlayerPosition } from '../model/player.model';
 
 export interface GameStartDetails {
   profileName: string;
@@ -12,6 +9,7 @@ export interface GameStartDetails {
   anteAmount: number;
   smallBet: number;
   bigBet: number;
+  userPosition: number;
 }
 
 @Injectable({
@@ -25,19 +23,36 @@ export class GameStartInfoService {
     anteAmount: 0,
     smallBet: 0,
     bigBet: 0,
-  });
-  private gameUserInfoSource = new BehaviorSubject<UserDetails>({
     userPosition: 1,
   });
+  private gameCurrentPlayerInfoSource = new BehaviorSubject<Player>(
+    new Player(1, PlayerPosition.SMALL_BLIND)
+  );
+
+  private playersArraySource = new BehaviorSubject<
+    Array<Player | null | undefined>
+  >([]);
+
+  private playersCountSource = new BehaviorSubject<number | undefined>(0);
 
   gameStartData$ = this.gameStartDataSource.asObservable();
-  gameUserInfoData$ = this.gameUserInfoSource.asObservable();
+  gameCurrentPlayer$ = this.gameCurrentPlayerInfoSource.asObservable();
+  playersArray$ = this.playersArraySource.asObservable();
+  playersCount$ = this.playersCountSource.asObservable();
 
   setGameStartData(data: any) {
     this.gameStartDataSource.next(data);
   }
 
-  setGameUserInfoData(data: UserDetails) {
-    this.gameUserInfoSource.next(data);
+  setGameCurrentPlayerInfoSource(data: Player) {
+    this.gameCurrentPlayerInfoSource.next(data);
+  }
+
+  setPlayersArraySource(data: Array<Player | null | undefined>) {
+    this.playersArraySource.next(data);
+  }
+
+  setPlayerCountSource(data: number | undefined) {
+    this.playersCountSource.next(data);
   }
 }

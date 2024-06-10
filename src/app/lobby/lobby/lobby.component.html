@@ -1,9 +1,6 @@
-<p>{{ authUser | json }}</p>
-<button (click)="getUserInfo()">getUserInfo</button>
-<button (click)="checkout()">Checkout</button>
 <div class="grid-container">
   <h1 class="mat-h1">Lobby</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
+  <mat-grid-list cols="6" rowHeight="350px">
     <mat-grid-tile
       *ngFor="let card of cards | async"
       [colspan]="card.cols"
@@ -16,15 +13,43 @@
           </mat-card-title>
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
-          <div>
+          <ng-container *ngIf="card.title === 'Game Engine'">
             <button
               mat-raised-button
               color="accent"
               (click)="onOpenDialogClick()"
             >
-              No-Limit Holdem
+              Limited Holdem
             </button>
-          </div>
+          </ng-container>
+          <ng-container *ngIf="card.title === 'User Information'">
+            <div class="border-sub">
+              <h3 style="color: red">Subscription Inactive</h3>
+              <button mat-raised-button color="accent" (click)="checkout()">
+                Subscribe
+              </button>
+            </div>
+            <button
+              class="but-wi"
+              mat-raised-button
+              color="primary"
+              [routerLink]="'/success'"
+            >
+              Transction Complete Page
+            </button>
+            <button
+              class="but-wi"
+              mat-raised-button
+              color="warn"
+              [routerLink]="'/cancel'"
+            >
+              Transction Cancel Page
+            </button>
+          </ng-container>
+
+          <ng-container *ngIf="card.title === 'News'">
+            <h2>New updates.</h2>
+          </ng-container>
         </mat-card-content>
       </mat-card>
     </mat-grid-tile>

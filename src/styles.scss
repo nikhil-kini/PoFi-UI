@@ -3,12 +3,16 @@
 
 @include mat.core();
 
+$dark-primary: mat.define-palette(mat.$yellow-palette, 700);
+$dark-accent: mat.define-palette(mat.$yellow-palette, A200, A100, A400);
+$dark-success: mat.define-palette(mat.$green-palette, 700);
 
 // Define a dark theme
 $dark-theme: mat.define-dark-theme((
  color: (
-   primary: mat.define-palette(mat.$grey-palette, 900),
-   accent: mat.define-palette(mat.$amber-palette, A200, A100, A400),
+   primary: $dark-primary,
+   accent: $dark-accent,
+   success: $dark-success
  ),
   typography: mat.define-typography-config(),
 ));
@@ -18,7 +22,32 @@ $dark-theme: mat.define-dark-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+html{
+  height: 100%;
+}
+
+.mat-success {
+  background-color: rgb(11, 216, 11);
+  color: #fff;
+}
+
 body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.page-center{
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
- 
+.border-container{
+  border: thin inset #ffee10;
+  padding: 4rem;
+  border-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

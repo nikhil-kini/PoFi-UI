@@ -41,7 +41,6 @@ const routes: Routes = [
       import('./limited-holdem/limited-holdem.module').then(
         (m) => m.LimitedHoldemModule
       ),
-    canActivate: [authGuard],
   },
   {
     path: '**',

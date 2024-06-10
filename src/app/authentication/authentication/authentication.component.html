@@ -1,4 +1,4 @@
-<div class="page-center">
+<div class="auth-position">
   <mat-card class="card-auth">
     <mat-card-header>
       <mat-card-title> Authentication </mat-card-title>
@@ -42,7 +42,7 @@
               <button
                 class="sign-button"
                 mat-raised-button
-                [disabled]="!signInForm.valid && !loading"
+                [disabled]="!signInForm.valid && loading"
                 color="accent"
                 (click)="signIn()"
               >

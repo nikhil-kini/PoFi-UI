@@ -7,7 +7,7 @@ import { Position } from '../commons/constants/constants';
 import { GameType, PlayState, Round } from '../model/table.model';
 import { Observable } from 'rxjs';
 import { HttpClientService } from './http-client.service';
-import { GameStartDetails, UserDetails } from './game-start-info.service';
+import { GameStartDetails } from './game-start-info.service';
 
 @Injectable({
   providedIn: 'root',
@@ -45,13 +45,13 @@ export class GameTableService {
    * @param totalPlayers Total player seats in the game
    *
    */
-  createTable(gameStartData: GameStartDetails, gameUserInfoData: UserDetails) {
-    this.totalPlayers$ = gameStartData.tableSeats;
-    this.tableAnte$ = gameStartData.anteAmount;
-    this.smallBet$ = Number(gameStartData.smallBet);
-    this.bigBet$ = Number(gameStartData.bigBet);
+  createTable(gameStartData: GameStartDetails) {
+    this.totalPlayers$ = +gameStartData.tableSeats;
+    this.tableAnte$ = +gameStartData.anteAmount;
+    this.smallBet$ = +gameStartData.smallBet;
+    this.bigBet$ = +gameStartData.bigBet;
 
-    this.userPositon$ = gameUserInfoData.userPosition;
+    this.userPositon$ = +gameStartData.userPosition;
 
     let playerPosition = Position.PLAYER_POSITION[this.totalPlayers$];
 
@@ -97,7 +97,7 @@ export class GameTableService {
    *
    * @param playerStatus palyer status to be updated for current player.
    */
-  playerAction(playerStatus: PlayerStatus, addAmount: number = 0) {
+  playerAction(playerStatus: PlayerStatus, addAmount: number = 0): boolean {
     this.currentPlayer$!.playerStatus = playerStatus;
     switch (playerStatus) {
       case PlayerStatus.NA:
@@ -128,14 +128,14 @@ export class GameTableService {
         break;
     }
 
-    this.changeCurrentPlayerToNextAndUpdateRound();
+    return this.changeCurrentPlayerToNextAndUpdateRound();
   }
 
-  changeCurrentPlayerToNextAndUpdateRound() {
+  changeCurrentPlayerToNextAndUpdateRound(): boolean {
     if (this.currentPlayer$?.nextPlayer === this.startPlayer$) {
       if (this.tableRound$ === Round.RIVER.valueOf()) {
         //Impl logic
-        alert('Game end');
+        return false;
       } else {
         this.tableRound$ += 1;
         this.tablePlayState$ = 0;
@@ -148,9 +148,11 @@ export class GameTableService {
         this.tableRunningBet$ = 0;
         this.gerenaratePlayerSeatingService.softResetPlayers();
         this.isFreshRound$ = true;
+        return true;
       }
     } else {
       this.currentPlayer$ = this.getNext(this.currentPlayer$!);
+      return true;
     }
   }
 
@@ -218,5 +220,9 @@ export class GameTableService {
         : [],
       gameLevel: Round[this.tableRound$],
     });
+  }
+
+  newGame(): void {
+    this.gerenaratePlayerSeatingService.newTable();
   }
 }

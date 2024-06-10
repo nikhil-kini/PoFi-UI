@@ -13,6 +13,23 @@
   .dashboard-card-content {
     display: flex;
     align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .border-sub{
+    display: flex;
+    align-items: center;
     justify-content: center;
-    height: 50%;
+    flex-direction: column;
+    width: 70%;
+    padding: 0 0 20px 0;
+    border: thin inset #ffee10;
+    border-radius: 10px;
+  }
+
+  .but-wi{
+    width: 200px;
+
   }

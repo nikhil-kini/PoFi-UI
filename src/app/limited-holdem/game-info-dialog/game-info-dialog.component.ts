@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -50,6 +50,10 @@ export class GameInfoDialogComponent {
     bigBet: this.builder.control(this.startData.bigBet, [
       Validators.required,
       Validators.pattern('[0-9.]*'),
+    ]),
+    userPosition: this.builder.control(this.startData.userPosition, [
+      Validators.required,
+      Validators.pattern('[1-9]'),
     ]),
   });
 
