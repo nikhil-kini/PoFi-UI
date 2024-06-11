@@ -1,4 +1,4 @@
-import { Component, OnChanges } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Player, PlayerStatus } from 'src/app/model/player.model';
 import { Round } from 'src/app/model/table.model';
@@ -17,7 +17,7 @@ import { GameInfoDialogComponent } from '../game-info-dialog/game-info-dialog.co
   templateUrl: './player-input-panel.component.html',
   styleUrls: ['./player-input-panel.component.scss'],
 })
-export class PlayerInputPanelComponent implements OnChanges {
+export class PlayerInputPanelComponent {
   private gameStartData!: GameStartDetails;
   players$!: Array<Player | null | undefined>;
   playersCount$!: number | undefined;
@@ -35,13 +35,13 @@ export class PlayerInputPanelComponent implements OnChanges {
   ) {}
 
   ngOnInit() {
-    this.onOpenDialogPageStart('Game Information');
     this.setUpData();
   }
 
   ngOnDestroy(): void {
     this.gameUserInfoSubscription.unsubscribe();
     this.gameaStartDataSubscription.unsubscribe();
+    console.log('destroyed');
   }
 
   setUpData() {
@@ -49,9 +49,12 @@ export class PlayerInputPanelComponent implements OnChanges {
       this.gameStartInfoService.gameStartData$.subscribe(
         (data) => (this.gameStartData = data)
       );
-    this.gameStartInfoService.gameCurrentPlayer$.subscribe((data) =>
-      console.log(data)
-    );
+    this.gameUserInfoSubscription =
+      this.gameStartInfoService.gameCurrentPlayer$.subscribe((data) => {
+        if (data == this.gameTS.userPlayer$) {
+          this.getResult();
+        }
+      });
   }
 
   toggle() {
@@ -59,20 +62,16 @@ export class PlayerInputPanelComponent implements OnChanges {
     this.gameStartInfoService.setPlayersArraySource(this.gameTS.tablePlayers$);
     this.gameStartInfoService.setPlayerCountSource(this.gameTS.totalPlayers$);
   }
+
   onOpenDialogPageStart(title: string) {
     var _dialog = this.matDialog.open(GameInfoDialogComponent, {
       width: '360px',
-      hasBackdrop: false,
+      hasBackdrop: true,
       data: {
         title: title,
       },
     });
     _dialog.afterClosed().subscribe(() => this.toggle());
-  }
-
-  ngOnChanges() {
-    this.getResult();
-    console.log('changes');
   }
 
   getPot(): number {
@@ -88,9 +87,13 @@ export class PlayerInputPanelComponent implements OnChanges {
   }
 
   checkUser(): boolean {
-    return this.gameTS.currentPlayer$ === this.gameTS.userPlayer$
-      ? true
-      : false;
+    if (
+      this.gameTS.currentPlayer$ === this.gameTS.userPlayer$ &&
+      this.gameTS.userCards$
+    ) {
+      return true;
+    }
+    return false;
   }
 
   getRound(): string {
@@ -124,15 +127,17 @@ export class PlayerInputPanelComponent implements OnChanges {
   }
 
   raise(amount: string) {
-    this.gameTS.playerAction(PlayerStatus.RAISE, Number(amount));
+    if (!this.gameTS.playerAction(PlayerStatus.RAISE, Number(amount)))
+      this.restartGame();
   }
 
   fold() {
-    this.gameTS.playerAction(PlayerStatus.FOLD);
+    if (!this.gameTS.playerAction(PlayerStatus.FOLD)) this.restartGame();
   }
 
   bet(amount: string) {
-    this.gameTS.playerAction(PlayerStatus.BET, Number(amount));
+    if (!this.gameTS.playerAction(PlayerStatus.BET, Number(amount)))
+      this.restartGame();
   }
 
   check() {
@@ -141,6 +146,6 @@ export class PlayerInputPanelComponent implements OnChanges {
 
   restartGame() {
     this.gameTS.newGame();
-    this.onOpenDialogPageStart('Update Game Information');
+    this.onOpenDialogPageStart('New Game, Update Information');
   }
 }

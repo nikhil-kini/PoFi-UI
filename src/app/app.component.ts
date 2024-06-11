@@ -20,8 +20,7 @@ export class AppComponent {
       shareReplay()
     );
   navLinks = [
-    { path: 'home', title: 'HOME' },
-    { path: 'about', title: 'ABOUT' },
-    { path: 'contact', title: 'CONTACT' },
+    { path: '/home', title: 'HOME' },
+    { path: '/about', title: 'ABOUT' },
   ];
 }

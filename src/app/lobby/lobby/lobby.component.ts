@@ -69,18 +69,4 @@ export class LobbyComponent {
       ];
     })
   );
-
-  onOpenDialogClick() {
-    var _dialog = this.matDialog.open(GameInfoDialogComponent, {
-      width: '360px',
-      hasBackdrop: false,
-      data: {
-        title: 'Game Information',
-      },
-    });
-
-    _dialog.afterClosed().subscribe((item) => {
-      console.log(item);
-    });
-  }
 }

@@ -1,13 +1,5 @@
-.grid-container {
-    margin: 20px;
-  }
     
-  mat-card {
-    width: 100%;
-    height: 100%;
-  }
-    
-  .dashboard-card-content {
+.dashboard-card-content {
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -15,11 +7,20 @@
     width: 100%;
     padding: 0 0 0 0;
   }
-  
-  mat-card{
+
+  mat-grid-tile div{
+    display: flex;
+    align-items: flex-start !important;
+  }
+
+mat-card{
     height: 98%;
     width: 98%;
   }
+
+  pofri-poker-table{
+    margin: 50px 50px 50px 50px !important;
+  }
   
-  
+
   

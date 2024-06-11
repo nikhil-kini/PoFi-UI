@@ -1,7 +1,8 @@
 import { PlayerPosition } from '../../model/player.model';
 
 export abstract class Constants {
-  static readonly MOBILE_TRANSITION = '(max-width: 720px)';
+  static readonly MOBILE_TRANSITION = '(max-width: 470px)';
+  static readonly TABLET_TRANSITION = '(max-width: 980px)';
 }
 
 export abstract class Position {

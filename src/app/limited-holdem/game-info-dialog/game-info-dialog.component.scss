@@ -24,4 +24,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
+
+    mat-form-field, div{
+      margin: 10px, 0, 10px, 0;
+    }
 }

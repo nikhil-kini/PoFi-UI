@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+
 import {
   GameStartDetails,
   GameStartInfoService,
@@ -19,8 +19,7 @@ export class GameInfoDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ref: MatDialogRef<GameInfoDialogComponent>,
     private builder: FormBuilder,
-    private gameStartInfoService: GameStartInfoService,
-    private router: Router
+    private gameStartInfoService: GameStartInfoService
   ) {}
 
   closepopup() {
@@ -28,13 +27,6 @@ export class GameInfoDialogComponent {
   }
 
   gameInfoForm = this.builder.group({
-    profileName: this.builder.control(this.startData.profileName, [
-      Validators.required,
-    ]),
-    websiteName: this.builder.control(this.startData.websiteName, [
-      Validators.required,
-      Validators.pattern(`[a-zA-Z0-9.\-]*`),
-    ]),
     tableSeats: this.builder.control(this.startData.tableSeats, [
       Validators.required,
       Validators.pattern('[2-9]'),
@@ -58,10 +50,7 @@ export class GameInfoDialogComponent {
   });
 
   saveGameInfo() {
-    // console.log(this.gameInfoForm.value.anteAmount);
-    // console.log(this.startData.bigBet);
     this.gameStartInfoService.setGameStartData(this.gameInfoForm.value);
     this.closepopup();
-    this.router.navigate(['/', 'l-holdem']);
   }
 }

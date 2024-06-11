@@ -1,6 +1,10 @@
 mat-sidenav-container{
     height: 100%;
+    max-width: 71rem;
+    margin-left: auto;
+    margin-right: auto;
 }
+
 
 mat-sidenav-content{
     display: flex;

@@ -7,7 +7,10 @@ import { Position } from '../commons/constants/constants';
 import { GameType, PlayState, Round } from '../model/table.model';
 import { Observable } from 'rxjs';
 import { HttpClientService } from './http-client.service';
-import { GameStartDetails } from './game-start-info.service';
+import {
+  GameStartDetails,
+  GameStartInfoService,
+} from './game-start-info.service';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +40,8 @@ export class GameTableService {
   constructor(
     private commonService: CommonService,
     private gerenaratePlayerSeatingService: GerenaratePlayerSeatingService,
-    private httpClient: HttpClientService
+    private httpClient: HttpClientService,
+    private gameInfoService: GameStartInfoService
   ) {}
 
   /**
@@ -148,10 +152,14 @@ export class GameTableService {
         this.tableRunningBet$ = 0;
         this.gerenaratePlayerSeatingService.softResetPlayers();
         this.isFreshRound$ = true;
+        this.gameInfoService.setGameCurrentPlayerInfoSource(
+          this.currentPlayer$!
+        );
         return true;
       }
     } else {
       this.currentPlayer$ = this.getNext(this.currentPlayer$!);
+      this.gameInfoService.setGameCurrentPlayerInfoSource(this.currentPlayer$!);
       return true;
     }
   }

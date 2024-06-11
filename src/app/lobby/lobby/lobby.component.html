@@ -14,11 +14,7 @@
         </mat-card-header>
         <mat-card-content class="dashboard-card-content">
           <ng-container *ngIf="card.title === 'Game Engine'">
-            <button
-              mat-raised-button
-              color="accent"
-              (click)="onOpenDialogClick()"
-            >
+            <button mat-raised-button color="accent" [routerLink]="'/l-holdem'">
               Limited Holdem
             </button>
           </ng-container>

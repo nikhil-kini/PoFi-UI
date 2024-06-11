@@ -1,6 +1,6 @@
   @use "sass:math";
 
-  $size-table: clamp(21rem, 40vw, 100rem);
+  $size-table: clamp(20rem, 80vw, 34rem);
   $sixe-player-box: 5em;
 
     /// @param {Integer} $item-count - Number of items on the circle
